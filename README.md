@@ -7,7 +7,9 @@ This is an attempt to transcribe all the tunes in the
 into ABC notation and then process that into various
 useful formats.
 
-This work is explicitly licensed under a Creative Commons 'Attribution ShareAlike (CC BY-SA)' licence, which means you can
-"remix, tweak, and build upon" my work even for commercial purposes,
+This work is explicitly licensed under a Creative Commons
+'[Attribution ShareAlike (CC BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/)'
+licence, which means you can
+"remix, tweak, and build upon" my this even for commercial purposes,
 as long as you credit me and license your new creations under the identical terms. The licensing of the Tuneworks Tunebook on which
 this work is based is unclear, other than it saying "The book is downloadable from http://www.tuneworks.co.uk/. Please feel free to use it as widely as you like".
