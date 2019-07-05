@@ -1,0 +1,320 @@
+X:10000
+T:
+R:Reel|Jig|Slip Jig|Hornpipe|Polka|Waltz
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick <jon.warbrick@googlemail.com>
+M:4/4 2/2 2/4 6/8 9/8 3/4
+L:1/8
+K:D
+
+
+
+X:10101
+T:Speed the Plough
+R:Reel
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p1
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:G
+|: "G"GABc dedB | dedB dedB | "C"c2 ec "G"B2 dB | "D"c2 A2 A4 | 
+"G"GABc dedB | dedB dedB | "C"c2 ec "G"B2 dB | "D"A2 F2 "G"G4 :| 
+|: "G"g2 g2 gdBd | g2 fe d2 B2 | "C"c2 ec "G"B2 dB | "D"c2 A2 A4 | 
+| "G"g2 g2 gdBd | g2 fe d2 B2 | "C"c2 ec "G"B2 dB | "D"A2 F2 "G"G4 :|
+
+
+
+X:10102
+T:Morpeth Rant
+R:Reel
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: A2 | "D"d2 AG FDFA | "G"BGBd "A"cAce | "D"f2fd "G"gfed | "A"c2 e2 e2A2 | 
+"D"d2 AG FDFA | "G"BGBd "A"cAce | "D"f2 fd "G"gfed | "A"A2 d2 "D"d2:|
+|: A2 | "D"dfaf dfaf | "G"gfef g2 ef | "A"gfed cdeg | "D"fefg f2 A2 | 
+"D"dfaf dfaf | "G"gfef g2 ef | "A"gfed caag | "D"f2d2d2 :|
+
+
+
+X:10103
+T:Winster Gallop
+R:Reel
+M:2/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+G:Tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:G
+|: "G"GB GB | GB d2 | "D"AB/c/ BA | "G"GB d2 | "C"ce ge | "G"dB d2 | "D"AB/c/ BA | "G"GB G2  :|
+|: "G"gf ed | gf ed | gf ed | "D"cB A2 | fed2 | fe d2 | d2 A>c | "G"BG G2 :|
+
+
+X:10201
+T:Rattling Bog
+R:Reel
+M:4/4
+L:1/8
+B: Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+G: tuneworks
+Z: Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: de | "D"f4 f3 e | "G"d2 B2 B3 B | "D"A2 d2 dcde | "A"f2 e2 e4 |
+"D"f4 f3 e | "G"d2 B2 B3 B | "D"A2 a2 a2 f2 | "A"e2 d2 "D"d2 :|
+|: de | "D"f2 d2 "A"e2 d2 | "D"f2 d2 "A"e2 de | "D"f2 a2a2f2 | "A"e2 d2 e2 de |
+"D"f2 d2 "A"e2 d2 | "D"f2 d2 "A"e2 de | "D"f2a2 a2 f2 | "A"e2 d2 "D"d2:|
+
+
+
+X:10202
+T:The Sloe
+R:Reel
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: A2 | "D"d2 A2 d2 e2 | f3 e d2 c2 | "G"B2 A2 BcdB | "A"A2 G2 F2 A2 | 
+"D"d2 A2 d2e2 | f3 e d2 c2 | "G"B2 A2 B2 c2 | "D"d4 d2 :|
+|: A2 |"D"(3BcB A2 F2  A2 | (3BcB A2 F2 dd | "G"d2 cc "A"c2 BB | "D"B2 A2 A2 dd | 
+"G"d2 c2 "A"c2 ee | "D"e2 d2 d2 ff | "G"f2 e2 "A"B2 c2 | "D"d4 d2 :|
+
+
+X:10301
+T:The Blackthorn Stick
+R:Jig
+M:6/8
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p3
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:G
+|: d | "G"gfg ege | dBG AGE | DGG FGA | "D"BGB A2 d | 
+"G"gfg age | dBG  AGE | "G"DGG "D"FGA | "G"BGG G2 :|
+|: d | "G"edd gdd | edd gdd | ede gfg | "D"edB A2 d | 
+"G"gfg age | dBG AGE | "G"DGG "D" FGA | "G"BGG G2 :|
+
+
+X:10302
+T:The Rakes of Kildare
+R:Jig
+M:6/8
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p3
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:G
+|: G | "Am"EAA AGA | Bcd e2 f | "G"!turn!g3 ege | dBA GFF | 
+"Am"EAA AGA | Bcd e2 f | "G"!turn!g3 edB | [1 "Am"A3 A2 :| [2 "Am"A3 A2 a || 
+"Am"aea aea | aea b2 a | "G"!turn!g3 ege | dBA G2 a | 
+"Am"aea aea | aea b2 a | "G"!turn!g3 edB | "Am"A3 A2 a | 
+"Am"aea aea | aea b2 a | "G"!turn!g3 ege | dBA GFG | 
+"Am"EAA AGA | Bcd e2 f | "G"!turn!g3 edB | "Am"A3A |]
+
+
+X:10401
+T:Harvest Home
+R:Hornpipe
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: AF | DAFA DAFA | defe dcBA | eAfA gAfA | (3efe (3dcB (3ABA (3GFE | 
+DAFA DAFA | defe dcBA | eAfA gece | d2 f2 d2 :|
+|: cd | eA (3AAA  fA (3AAA | gAfA eA (3AAA | eAfA gAfA | 
+(3efe (3dcB (3ABA (3GFE | DAFA DAFA | defe dcBA | eAfA gece | d2 f2 d2 :|
+
+
+X:10402
+T:Off to California
+R:Hornpipe
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p4
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: (3DEF | "G"GFGB AGED | GBdg "C"e2 (3def | "G"gfgd edBG | "C"ABAG "D"E2 (3DEF | 
+"G"GFGB AGED | GBdg "C"e2 (3def | "G"gfgd edBG | "C"(3ABA "D"GF "G"G2 :|
+|: (3def | "Em"gfeg "D"fedf | "C"edef edBd | "G"gfgd edBG | "C"ABAG "D"E2 (3DEF | 
+"G"GEGB AGED | GBdg "C"e2 (3def | "G"gfgd edBG | "C"(3ABA "D"GF "G"G2 :|
+
+
+X:10501
+T:Willafjord
+R:Reel
+M:4/4
+L:1/8
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p5
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: B2 | "D"A2 F A2 DFA | "G"B2 G B2 DGB | "D"A2F A2 DFA | "G"EFGA "A"GFED | 
+"D"A2 F A2 DFA | "G"B2 G B2 DGB | "A7"ABcd efge | "D"f2d2d2 :|
+|: e2 | "D"f2 d f2 fdf | "G"gfaf gfed | "D"f2 d f2 Adf | "A"ABcd efge | 
+"D"f2 d f2 fdf | "G"gfaf gfed | "A"ABcd efge | "D"f2 d2 d2 :|
+
+
+X:10502
+T:Spootiskerry
+R:Reel
+M:4/4
+L:1/8
+B: Tuneworks Tunebook (https://www.tuneworks.co.uk/) p5
+G: tuneworks
+Z: Jon Warbrick, jon.warbrick@googlemail.com
+K:G
+|: DE | "G"G2 DE GDEG | DEGA B2 AB | G2 DE GABd | "C"eged "D"B2 AB | 
+"G"G2 DE GDEG | DEGA B2 AB | "C"g2 ed "D"edBA | "G"B2 G2 G2 :|
+ef | "G"g2 ed edBA | BABG "C"E2 DE | "G"GABd eged | "D"B2 A2 "G"A2 ef | 
+"G"g2 ed edBA | BABG "C"E2 DE | "G"GABd eged | "D"B2 G2 "G"G2 ef | 
+"EM"g2 ed edBA | "C"BABG E2DE | "G"GABd eged | "D"B2 A2 A2 DE |
+"G"G2 DE GDEG | DEGA B2 AB | g2 ed "C"edBA | "D"B2 G2 "G"G2 |]
+
+
+X:10601
+T:
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+M:4/4
+L:1/8
+K:D
+|: "D"FAAB AFED | EAAB ABde | "Bm"fBBA Bcde | f2 gf "A"edBA | 
+"D"FAAB AFED | EAAB ABde | "Bm"fBBA BcdB | "A"AFEF "D"D4 :|
+|: "D"fgag fede | fdad fd d2 | "G"efga bgef | "A"gebe gfeg | 
+"D"fgaf bfaf | defd e2 de | "G"fBBA BcdB | "A"AFEF "D"D4 :|
+
+
+
+X:10602
+T:The Flowers of Edinburgh
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+M:4/4
+L:1/8
+K:G
+|: GE | "G"D2 DE G2 GA | BGBd cBAG | "D"FGEF D2DE | FDdF E2 GE | 
+"G"D2 DE G2GA | BGBd efge | "C"dcBA GFGA | "Em"B2 G2 G2:|
+|: Bd | "Em"g2 gf gbag | "D"f2 fe fagf | "C"edef gfed | "Em"B2 e2 e2 ge | 
+"G"dBGB d2 d2 | "C"edef g2 fe | "G"dcBA "D"GFGA | "G"B2 G2 G2 :|
+
+
+X:10603
+T:Staten Island
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+R:Reel
+M:4/4
+L:1/8
+K:D
+|: AG | "D"FDFG A2 A2 | dfed dcBA | "G"B2 GB "D"A2 FA | "A"G2 E2 E2 AG | 
+"D"FDFG A2 A2 | dfed dcBA | "G"d2 d2 "A"efge | "D"f2 d2 d2 :|
+|: fg | "D"a2 fa "A"g2 eg | "D"f2 df "A"ecBA | "C"=c2 c2 efge | =c2 c2 efge | 
+"D"a2 fa "A"g2 eg | "D"f2 df "A"ecBA | "G"d2 d2 "A"efge | "D"f2 d2 d2:|
+
+
+
+X:10000
+T:Over the Moors to Maggie
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick, jon.warbrick@googlemail.com
+M:4/4
+L:1/8
+K:G
+|: EF | "G"G2 GA BGBd | efge dBAG | "Am"EAAG ABAG | "D"EAAG AcBA | 
+"G"G2 GA BGBd | efge dBAG | "C"DGGF "D"GBAG | EDEF "G"G2:|
+|: ga| "G"b2 bg "D"a2 af | "Em"g2 ge d2 Bd | "Am"eaag abag | eaag "D"a2 ga | 
+"G"b2 bg "D"a2 ef | "Em"gage d2 Bc | "G"dggf gbag | "D"edef "G"g2:|
+|: cd | "C"e2 ec "G"d2 dB | "Am"c2 cA "G"BAGD | "Am"EAAG ABAG | EAAG "D"ABcd | 
+"C"e2 ec "G"d2 dB | "Am"c2 cA "G"BAGE | "G"DGGF GBAG | "C"EDEF "G"G2 :|
+
+
+
+X:10702
+T:Miss McLeod's
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick <jon.warbrick@googlemail.com>
+M:4/4
+K:G
+|: "G"G2 g2 edeg | B2 BA BcBA | "G"G2 g2 edeg | "D"A2 AG AcBA | 
+"G"G2 g2 edeg | BcBA B2 d2 | "C"edcd edef | gedB "D"AcBA :|
+"G"GABc dBGA | B2 BA BcBA | "G"GABc dBGB | "D"A2 AG AcBA | 
+"G"GABc dBGA | B2 BA B2 d2 | "C"edcd edef | gedB "D"AcBA :| 
+
+
+X:10801
+T:The Merry Backsmith
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick <jon.warbrick@googlemail.com>
+M:4/4
+L:1/8
+K:D
+|: AB | "D"d2 dA BAFA | ABdA BAFA | "G"ABde  f2ed | "A"Beed egfe | 
+"D"d2 dA BAFA | ABdA BAFA | "G"ABde f2 ec | "A"dBAF "D"D2 :|
+|: fg | "D"a2 ag f2fe | d2 dA BAFA | "G"ABde f2ed | "A"Beed egfe | 
+"D"abag fgfe | d2 dA BAFA | "G"ABde f2 ec | "A"dBAF "D"D2 :|
+
+
+X:10802
+T:The Banshee
+R:Reel
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick <jon.warbrick@googlemail.com>
+M:4/4
+L:1/8
+K:G
+|: "G"G3 D EDB,D | GFGB d2 Bd | "C"eged BAGA | "D"BAGE E2 DE | 
+"G"G2 GD EDB,D | GFGB d2Bd | "C"eged BAGA | [1"D"BAGE E2 DE :| [2"D"BAGE E2 D2 ||
+|: "Em"eaag egge | dBBA BABd | "C"eB B2 gBfB | "D"eBBA B2 Bd | 
+"Em"eaag egge | dBBA B2 Bd | "C"eged BAGA | "D"BAGE E2 D2 :|
+
+
+X:10803
+T:St. Kilda Wedding
+R:Reel|Jig|Slip Jig|Hornpipe|Polka|Waltz
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
+G:tuneworks
+Z:Jon Warbrick <jon.warbrick@googlemail.com>
+M:4/4
+L:1/8
+K:A
+|: "A"A2 Ac Acec | "D"B2 cA "E"F2 EF | "A"A2 cB Acea | [1"D"f2 fe "E"fefa  :| [2"D"f2 "E"fe fefg ||
+"F#m"a2 ab aeea | "E"fgag f2 ed | "D"cefg agfa | "E"ecac BdcB | 
+"F#m"Aaag aeea | "E"fgag f2 ed | "D"cefg agfa | "E"ecac BdcB |]
+
+
+
+X:11301
+T:The Bear Dance
+R:Reel
+M:2/4
+L:1/8
+B: Tuneworks Tunebook (https://www.tuneworks.co.uk/) p13
+G: tuneworks
+Z: Jon Warbrick, jon.warbrick@googlemail.com
+K:D
+|: "Em"BE E2 | BE E>F | GG FG | "D"A2 G>A | "Em"BB "D"AA | "C"GG "Bm"F2 | "Em"E/2F/2G "D"FD | "Em"E2 E2:|
+|: "Em"E/2F/2G E/2F/2G | "D"FD D2 | "Em"E/2F/2G E/2F/2G | "D"A2 G>A | "Em"BB "D"AA | "C"GG "Bm"F2 | "Em"E/2F/2G "D"FD | "Em"E2 E2 :|
+
+
+
