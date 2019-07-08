@@ -1,10 +1,13 @@
-%abc-2.1
-X:10000
-T:
-R:Reel|Jig|Slip Jig|Hornpipe|Polka|Waltz
+X:11010
+T:The Scholar
+R:Reel
 B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
 G:tuneworks
 Z:Jon Warbrick <jon.warbrick@googlemail.com>
-M:4/4 2/2 2/4 6/8 9/8 3/4
+M:4/4
 L:1/8
 K:D
+|: "D"dfaf gfeg | fdAG FGA=c | "G"BGGF EFGg | "A"fdec dcBA | 
+"D"dfaf gfeg | fdAG FGA=c | "G"BGGF DFGg | "A"fdec "D"d4 :|
+|: "D"a2 af dfaf | dfaf bagf | "C"g2 ge =cege | =cege agfg | 
+"D"a2af dfaf | dfaf bagf | "G"gfef gbag | "A"fdec "D"d4 :|
