@@ -1,0 +1,28 @@
+pageheight 29.7cm
+pagewidth 21cm
+
+topmargin 0.8cm
+leftmargin 1.5cm
+rightmargin 1.5cm
+botmargin 1.2cm
+
+%scale 0.74
+%staffsep   36
+%maxshrink  0.65
+%lineskipfac 1.1
+%parskipfac 0.4
+%textspace 0.2cm
+%topspace 0.1cm
+%titlespace 0.1cm
+%infospace 0.2cm
+%stretchlast 1
+
+topspace 0.0cm
+staffsep 0.7cm
+titleformat T-1
+maxshrink 1
+musiconly 1
+printtempo 0
+scale 0.74
+staffwidth 10cm
+stretchlast 1
