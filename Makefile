@@ -1,5 +1,6 @@
-default: dist/tunebook.abc dist/tunebook.pdf dist/tunebook-whistle.pdf dist/cheatsheet.pdf
+default: dist/tunebook.abc dist/tunebook.pdf dist/tunebook-tabs.pdf dist/cheatsheet.pdf
 
+# All the tunes in one big tunebook
 dist/tunebook.abc : header.abc abc/*.abc
 	mkdir -p dist
 	(echo '%abc-2.1'; \
