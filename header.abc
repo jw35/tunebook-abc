@@ -1,0 +1,30 @@
+%%vskip 1.5cm
+%%textfont * 36
+%%center Tunebook ABC
+%%vskip 2cm
+%%textfont * 18
+%%begintext justify
+%%This is a transcription of the tunes provided by
+%%Tuneworks (https://www.tuneworks.co.uk/) in support of the workshops
+%%and sessions they run at a number of UK folk festivals. While most of these tunes
+%%are already available on sites such as The Session, the ones here are
+%%intended to be note-for-note identical to the versions in the Tuneworks Tunebook.
+%%endtext
+%%vskip 0.75cm
+%%begintext justify
+%%Individual tune files and the tools used to process them can be found on GitHub
+%% at https://github.com/jw35/tunebook-abc
+%%endtext
+%%vskip 0.75cm
+%%begintext justify
+%%The transcription work is by Jon Warbrick <jon.warbrick@googlemail.com>,
+%%and that work is licensed under a Creative Commons
+%%'Attribution ShareAlike' licence, which means you can
+%%"remix, tweak, and build upon" this work even for commercial purposes,
+%%as long as you credit me and license your new creations under the identical terms.
+%%The licensing of the Tuneworks Tunebook on which
+%%this work is based is unclear, other than it saying in the introduction
+%%"The book is downloadable from http://www.tuneworks.co.uk/. Please feel
+%%free to use it as widely as you like".
+%%endtext
+%%newpage
