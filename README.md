@@ -13,3 +13,21 @@ licence, which means you can
 "remix, tweak, and build upon" my this even for commercial purposes,
 as long as you credit me and license your new creations under the identical terms. The licensing of the Tuneworks Tunebook on which
 this work is based is unclear, other than it saying "The book is downloadable from http://www.tuneworks.co.uk/. Please feel free to use it as widely as you like".
+
+Processing
+----------
+
+All the tunes are represented by ABC file fragments in at `abc/` directory. Their file names,
+and the `X:` field reference numbers inside them, are based on the two-digit page
+number on which the tune appears in the Tunebook and a two-digit sequence number
+within that page.
+
+There is a simple Makefile which will proceess these fragments into various formats
+(a multi-tune 'ABC tunebook', PDF in various formats, etc.). This was written
+to work on MacOS but should be compatible with most Unix-ish environments. The
+Makefile assumes that copies of the following programs are available somewhere on
+`$PATH` (all of which can be installed with Homebrew):
+
+* `abcm2ps` (https://github.com/leesavide/abcm2ps/, http://abcplus.sourceforge.net/#abcm2ps)
+* `mac2unix` (from the dos2unix package)
+* `ps2pdf` (from the Ghostscript package)
