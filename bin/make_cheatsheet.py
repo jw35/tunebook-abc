@@ -10,6 +10,7 @@ used here.
 
 import fileinput
 import re
+import sys
 
 from fractions import Fraction
 
@@ -89,14 +90,16 @@ for line in fileinput.input():
     # Notes
     elif length_so_far < 2*metre:
 
+        #print('Metre', metre, 'Default length', default_length, file=sys.stderr)
+
         # Dump leading bar marker
         line = re.sub(r'\s*\|:?\s*', '', line, count=1)
 
         for match in bar_pattern.finditer(line):
             bar = match.group('bar')
-            #print('Got bar', bar)
+            #print('Got bar', bar, file=sys.stderr)
             length = bar_length(bar, default_length)
-            #print('Length', length)
+            #print('Length', length, file=sys.stderr)
 
             print(bar, end='')
             length_so_far += length
