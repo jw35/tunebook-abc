@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function isDOSFile
+{
+  local FILENAME="$1"
+  file "$FILENAME" | grep -q "CRLF line terminators"
+}
+
+# Find '.abc' files with DOS line endings
+FOUND=0
+for FILE in $(exec git diff --cached --name-only --diff-filter=ACM | grep '.abc$') ; do
+    isDOSFile "$FILE"
+    if (( $? == 0 ))
+    then
+      echo "\"$FILE\" has DOS line endings" >&2
+      FOUND=1
+    fi
+done
+
+exit $FOUND
