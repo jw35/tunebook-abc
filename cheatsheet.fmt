@@ -24,7 +24,7 @@ maxshrink 1
 #musiconly 1
 printtempo 0
 scale 0.74
-staffwidth 10cm
+%staffwidth 10cm
 stretchlast 1
 
 % Include a copy of abcm2ps's 'flute.fmt' for whistle tabs
