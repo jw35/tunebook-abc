@@ -1,8 +1,15 @@
+.PHONY: default
 default: dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-tabs.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-whistle.pdf
+
+# EasyABC writes files with <cr><lf> line endings - this target
+# fixes them
+.PHONY: fixup
+fixup:
+	dos2unix abc/*.abc
 
 # All the tunes in one big tunebook
 dist/tunebook.abc : header.abc abc/*.abc
@@ -12,7 +19,6 @@ dist/tunebook.abc : header.abc abc/*.abc
 	 echo; echo; \
 	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) > $@
-	mac2unix $@
 
 # All the tunes as a printable score
 dist/tunebook.pdf : dist/tunebook.abc tunebook.fmt
