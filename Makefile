@@ -58,3 +58,8 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
  	 echo '%%staffwidth 10cm'; \
 	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) |  bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
+
+# Copy the generated files to a web site
+.PHONY: website
+website: default
+	scp dist/* jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
