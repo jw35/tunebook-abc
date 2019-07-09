@@ -3,7 +3,7 @@
 function isDOSFile
 {
   local FILENAME="$1"
-  file "$FILENAME" | grep -q "CRLF line terminators"
+  file "$FILENAME" | grep -q "with CRLF"
 }
 
 # Find '.abc' files with DOS line endings
