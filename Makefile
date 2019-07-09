@@ -1,4 +1,8 @@
-default: dist/tunebook.abc dist/tunebook.pdf dist/tunebook-tabs.pdf dist/cheatsheet.pdf
+default: dist/tunebook.abc \
+dist/tunebook.pdf \
+dist/tunebook-tabs.pdf \
+dist/cheatsheet.pdf \
+dist/cheatsheet-whistle.pdf
 
 # All the tunes in one big tunebook
 dist/tunebook.abc : header.abc abc/*.abc
@@ -25,3 +29,10 @@ dist/cheatsheet.pdf : abc/*.abc bin/make_cheatsheet.py cheatsheet.fmt
 	(echo '%abc-2.1'; \
   	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
   	) | bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -O - | ps2pdf - $@
+
+# The first few bars of all the tunes with whistle fingering
+dist/cheatsheet-whistle.pdf : abc/*.abc bin/make_cheatsheet.py cheatsheet.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+  	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
+  	) | bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -T1 -O - | ps2pdf - $@

@@ -21,8 +21,11 @@ topspace 0.0cm
 staffsep 0.7cm
 titleformat T-1
 maxshrink 1
-musiconly 1
+#musiconly 1
 printtempo 0
 scale 0.74
 staffwidth 10cm
 stretchlast 1
+
+% Include a copy of abcm2ps's 'flute.fmt' for whistle tabs
+format flute.fmt
