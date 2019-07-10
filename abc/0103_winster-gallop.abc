@@ -1,12 +1,11 @@
-%abc-2.1
 X:10103
 T:Winster Gallop
 R:Reel
-M:2/4
-L:1/8
-B:Tuneworks Tunebook (https://www.tuneworks.co.uk/) p2
+B:Tuneworks Tunebook (https://www.tuneworks.co.uk/)
 G:Tuneworks
 Z:Jon Warbrick, jon.warbrick@googlemail.com
+M:2/4
+L:1/8
 K:G
 |: "G"GB GB | GB d2 | "D"AB/c/ BA | "G"GB d2 | "C"ce ge | "G"dB d2 | "D"AB/c/ BA | "G"GB G2  :|
 |: "G"gf ed | gf ed | gf ed | "D"cB A2 | fed2 | fe d2 | d2 A>c | "G"BG G2 :|
