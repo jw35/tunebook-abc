@@ -19,27 +19,27 @@ stretchlast 1
 
 titleformat R-1 P-1 Q-1 T0 C1 O1 T0 N1
 
-%annotationfont sans-serif 12
-%composerfont   sans-serifItalic 14
-%footerfont     sans-serif 16
-%gchordfont     sans-serifBold 12
-%headerfont     sans-serif 16
-%historyfont    sans-serif 16
-infofont       sansItalic 14
-%measurefont     sans-serif 10
-%partsfont      serif 15
-%repeatfont     sans-serif 13
-%setfont-1      sans-serif 10
-%setfont-2      sans-serif 10
-%setfont-3      sans-serif 10
-%setfont-4      sans-serif 10
-%subtitlefont   sans-serifBold 16
-%tempofont      sans-serifBold 15
-%textfont       sansRoman 16
-titlefont      sans-serifBold 24
-%vocalfont      sans-serifBold 13
-%voicefont      sans-serifBold 13
-%wordsfont      sans-serif 16
+annotationfont Helvetica    12
+composerfont   Times-Italic 14
+footerfont     Helvetica    13
+gchordfont     Helvetica    12
+headerfont     Helvetica    14
+historyfont    Times        16
+infofont       Helvetica-Italic 14
+measurefont    Times-Italic 10
+partsfont      Times        15
+repeatfont     Times        13
+setfont-1      Times        12
+setfont-2      Times        12
+setfont-3      Times        12
+setfont-4      Times        12
+subtitlefont   Times        16
+tempofont      Times-Bold   15
+textfont       Times        16
+titlefont      Helvetica    20
+vocalfont      Times-Bold   13
+voicefont      Times-Bold   13
+wordsfont      Times        16
 
 diagram 1
 
