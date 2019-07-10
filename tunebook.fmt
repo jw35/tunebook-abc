@@ -17,6 +17,30 @@ titlespace 0.1cm
 infospace 0.2cm
 stretchlast 1
 
+titleformat R-1 P-1 Q-1 T0 C1 O1 T0 N1
+
+%annotationfont sans-serif 12
+%composerfont   sans-serifItalic 14
+%footerfont     sans-serif 16
+%gchordfont     sans-serifBold 12
+%headerfont     sans-serif 16
+%historyfont    sans-serif 16
+infofont       sansItalic 14
+%measurefont     sans-serif 10
+%partsfont      serif 15
+%repeatfont     sans-serif 13
+%setfont-1      sans-serif 10
+%setfont-2      sans-serif 10
+%setfont-3      sans-serif 10
+%setfont-4      sans-serif 10
+%subtitlefont   sans-serifBold 16
+%tempofont      sans-serifBold 15
+%textfont       sansRoman 16
+titlefont      sans-serifBold 24
+%vocalfont      sans-serifBold 13
+%voicefont      sans-serifBold 13
+%wordsfont      sans-serif 16
+
 diagram 1
 
 % Include a copy of abcm2ps's 'flute.fmt' for whistle tabs

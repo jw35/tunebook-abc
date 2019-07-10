@@ -18,7 +18,7 @@ dist/tunebook.abc : header.abc copying.abc abc/*.abc
 	 cat header.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo '%%newpage'; \
-	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
+	 for f in `ls abc/[0-9]*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) > $@
 
 # All the tunes as a printable score
@@ -34,7 +34,7 @@ dist/tunebook-tabs.pdf : dist/tunebook.abc header.abc tabs.abc copying.abc tuneb
 	 cat tabs.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo '%%newpage'; \
-	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
+	 for f in `ls abc/[0-9]*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) | bin/add_chords.py | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
 
 # The first few bars of all the tunes
@@ -45,7 +45,7 @@ dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/make_c
 	 cat cheatsheet.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo '%%staffwidth 10cm'; \
-	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
+	 for f in `ls abc/[0-9]*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) | bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -O - | ps2pdf - $@
 
 # The first few bars of all the tunes with whistle fingering
@@ -56,7 +56,7 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	 cat cheatsheet-whistle.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
  	 echo '%%staffwidth 10cm'; \
-	 for f in `ls abc/*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
+	 for f in `ls abc/[0-9]*.abc`; do (grep -v '%abc-2.1' "$${f}"; echo;) done \
 	) |  bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
 
 # Copy the generated files to a web site
