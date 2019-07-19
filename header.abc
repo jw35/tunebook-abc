@@ -1,6 +1,6 @@
 %%dateformat "%e %b, %Y %H:%M"
 %%header "$D		"
-%%footer "		$P"
+%%footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	$P"
 %%vskip 1.5cm
 %%textfont * 36
 %%center Tunebook ABC
