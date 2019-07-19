@@ -62,4 +62,4 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 # Copy the generated files to a web site
 .PHONY: website
 website: default
-	scp dist/* jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+	scp dist/* HEADER.html jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
