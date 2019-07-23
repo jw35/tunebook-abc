@@ -23,7 +23,7 @@ annotationfont Helvetica    12
 composerfont   Times-Italic 14
 footerfont     Helvetica    13
 gchordfont     Helvetica    12
-headerfont     Helvetica    14
+headerfont     Helvetica    11
 historyfont    Times        16
 infofont       Helvetica-Italic 14
 measurefont    Times-Italic 10

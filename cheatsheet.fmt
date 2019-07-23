@@ -29,3 +29,5 @@ stretchlast 1
 
 % Include a copy of abcm2ps's 'flute.fmt' for whistle tabs
 format flute.fmt
+
+headerfont     Helvetica    11
