@@ -1,5 +1,5 @@
-%%dateformat "%e %b, %Y %H:%M"
-%%footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	$P"
+%%header "-!!VERSION!!		$P"
+%%footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	"
 %%vskip 1.5cm
 %%textfont * 36
 %%center Tunebook ABC
