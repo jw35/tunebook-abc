@@ -68,6 +68,7 @@ dist/cheatsheet.pdf : dist/raw_tunebook.abc header.abc cheatsheet.abc copying.ab
 	 echo '%%staffwidth 10cm'; \
 	 cat dist/raw_tunebook.abc; \
 	) | bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Cheatsheet' $@
 
 # The first few bars of all the tunes with whistle fingering
 dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copying.abc bin/make_cheatsheet.py tunebook.fmt
@@ -79,7 +80,8 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
  	 echo '%%staffwidth 10cm'; \
 	 cat dist/raw_tunebook.abc; \
-	) |  bin/make_cheatsheet.py | abcm2ps - -i -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
 # Copy the generated files to a web site
 .PHONY: website
