@@ -1,6 +1,8 @@
 pageheight 29.7cm
 pagewidth 21cm
 
+footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	"
+
 topmargin 0.8cm
 leftmargin 1.5cm
 rightmargin 1.5cm
@@ -23,7 +25,7 @@ annotationfont Helvetica    12
 composerfont   Times-Italic 14
 footerfont     Helvetica    13
 gchordfont     Helvetica    12
-headerfont     Helvetica    11
+headerfont     Helvetica    13
 historyfont    Times        16
 infofont       Helvetica-Italic 14
 measurefont    Times-Italic 10
@@ -45,5 +47,6 @@ diagram 1
 
 % Include a copy of abcm2ps's 'flute.fmt' for whistle tabs
 format flute.fmt
+
 % Include a copy of http://abcplus.sourceforge.net/guitarchords.fmt
 format guitarchords.fmt
