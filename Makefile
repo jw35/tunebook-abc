@@ -1,9 +1,11 @@
-.PHONY: default
-default: dist/tunebook.abc \
+targets = dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-tabs.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-whistle.pdf
+
+.PHONY: default
+default: $(targets)
 
 # EasyABC writes files with <cr><lf> line endings - this target
 # fixes them
@@ -82,4 +84,4 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 # Copy the generated files to a web site
 .PHONY: website
 website: default
-	scp $default HEADER.html jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+	scp $(targets) HEADER.html jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
