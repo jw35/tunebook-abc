@@ -58,6 +58,7 @@ dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%staffwidth 10cm'; \
+	 echo '%%titleformat T-1'; \
 	 bin/sorter.py --title; \
 	) | bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet' $@
@@ -71,6 +72,7 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
  	 echo '%%staffwidth 10cm'; \
+ 	 echo '%%titleformat T-1'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
