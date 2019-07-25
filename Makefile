@@ -30,7 +30,9 @@ dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
+	) | abcm2ps - -i -F tunebook.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with guitar
