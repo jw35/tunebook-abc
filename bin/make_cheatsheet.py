@@ -19,12 +19,18 @@ note_pattern = re.compile(r"(?P<note>([_=^]?[A-Ga-gxz](,+|'+)?))(?P<length>\d{0,
 bar_pattern = re.compile(r'(?P<bar>.*?\|)')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--rows', default=10, type=float)
-parser.add_argument('--cols', default=2, type=float)
-parser.add_argument('--pagewidth', default=21, type=float)
-parser.add_argument('--margin', default=1.5, type=float)
-parser.add_argument('--gutter', default=1, type=float)
-parser.add_argument('files', nargs='*')
+parser.add_argument('--rows', default=10, type=float,
+                    help='number of rows (default %(default)s)')
+parser.add_argument('--cols', default=2, type=float,
+                    help='number of colums (default %(default)s)')
+parser.add_argument('--pagewidth', default=21, type=float,
+                    help='width of the page (cm, default %(default)s)')
+parser.add_argument('--margin', default=1.5, type=float,
+                    help='width of left & right page margin (cm, default %(default)s)')
+parser.add_argument('--gutter', default=1, type=float,
+                    help='width of the gutter between columns (cm, default %(default)s)')
+parser.add_argument('files', nargs='*',
+                    help='files to process (default stdin)')
 args = parser.parse_args()
 
 col_width = (args.pagewidth-(2 * args.margin)-((args.cols-1) * args.gutter)) / 2
