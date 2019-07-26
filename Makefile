@@ -91,7 +91,18 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
+
+dist/.abcfiles: abc/*.abc header.abc copying.abc
+	mkdir -p dist/abc
+	(cd abc; \
+	 for f in `ls [0-9]*.abc`; do ( \
+	 	echo '%abc-2.1'; \
+	 	cat "$${f}"; \
+	 	) > ../dist/abc/$${f}; done; \
+	)
+	touch dist/.abcfiles
+
 # Copy the generated files to a web site
 .PHONY: website
-website: default
-	scp $(targets) HEADER.html jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+website: default dist/.abcfiles
+	scp -r $(targets) HEADER.html dist/abc jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
