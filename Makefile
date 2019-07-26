@@ -57,10 +57,17 @@ dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter
 	 cat cheatsheet.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%staffwidth 10cm'; \
-	 echo '%%titleformat T-1'; \
+	 echo '%%topspace 0.3cm'; \
+     echo '%%staffsep 0.7cm'; \
+     echo '%%titleformat T-1'; \
+     echo '%%maxshrink 0.9'; \
+     echo '%%musiconly 1'; \
+     echo '%%printtempo 0'; \
+     echo '%%titlefont * 16'; \
+     echo '%%subtitlefont * 13'; \
+     echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) | bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
+	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet' $@
 
 # The first few bars of all the tunes with whistle fingering
@@ -71,10 +78,17 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	 cat cheatsheet-whistle.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
- 	 echo '%%staffwidth 10cm'; \
- 	 echo '%%titleformat T-1'; \
+	 echo '%%topspace 0.3cm'; \
+     echo '%%staffsep 0.7cm'; \
+     echo '%%titleformat T-1'; \
+     echo '%%maxshrink 0.9'; \
+     echo '%%musiconly 1'; \
+     echo '%%printtempo 0'; \
+     echo '%%titlefont * 16'; \
+     echo '%%subtitlefont * 13'; \
+     echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
 # Copy the generated files to a web site

@@ -8,15 +8,28 @@ to choke on entirely legal ABC files that happen to include features not
 used here.
 '''
 
+import argparse
 import fileinput
 import re
-import sys
 
 from fractions import Fraction
 
 # "borrowed' from EasyABC (https://sourceforge.net/projects/easyabc/)"
 note_pattern = re.compile(r"(?P<note>([_=^]?[A-Ga-gxz](,+|'+)?))(?P<length>\d{0,3}(?:/\d{0,3})*)(?P<dot>\.*)(?P<broken>[><]?)")
 bar_pattern = re.compile(r'(?P<bar>.*?\|)')
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--rows', default=10, type=float)
+parser.add_argument('--cols', default=2, type=float)
+parser.add_argument('--pagewidth', default=21, type=float)
+parser.add_argument('--margin', default=1.5, type=float)
+parser.add_argument('--gutter', default=1, type=float)
+parser.add_argument('files', nargs='*')
+args = parser.parse_args()
+
+col_width = (args.pagewidth-(2 * args.margin)-((args.cols-1) * args.gutter)) / 2
+# print(f'rows {args.rows} cols {args.cols} pagewidth {args.pagewidth}')
+# print(f'margin {args.margin} gutter {args.gutter} col_width {col_width}')
 
 
 def get_default_len(abc):
@@ -41,7 +54,7 @@ def bar_length(notes, default_length):
 
     for match in note_pattern.finditer(re.sub(r'".*?"', '', notes)):
 
-        #print(match.group('note'), match.group('length'), match.group('dot'))
+        # print(match.group('note'), match.group('length'), match.group('dot'))
 
         length = match.group('length')
         multiplier = Fraction(1)
@@ -58,7 +71,7 @@ def bar_length(notes, default_length):
         for dot in match.group('dot'):
             multiplier = multiplier * Fraction(3, 2)
 
-        #print(multiplier * default_length)
+        # print(multiplier * default_length)
 
         total_length += multiplier * default_length
 
@@ -69,8 +82,12 @@ length_so_far = 0
 metre = Fraction(4, 4)
 default_length = Fraction(1, 16)
 
+row = 0
+col = 0
+page = 0
+in_tune = False
 
-for line in fileinput.input():
+for line in fileinput.input(args.files):
 
     if re.match('X:', line):
         length_so_far = 0
@@ -83,27 +100,64 @@ for line in fileinput.input():
 
     # Blank lines
     if re.fullmatch(r'\s*', line):
+        in_tune = False
         print(line, end='')
-    # Headers and comments
-    elif re.match('([A-Za-z]:)|%', line):
+    # Start of tune
+    elif re.match('X:', line):
+        in_tune = False
+        # print(f'row {row}, col {col}, page {page}')
+        if row == 0:
+            if col == 0:
+                if page != 0:
+                    print('%%multicol end')
+                print('%%newpage')
+                if page == 0:
+                    print(f'%%staffwidth {col_width}cm')
+                print()
+                print('%%multicol start')
+            else:  # col > 1
+                print('%%multicol new')
+            lm = args.margin+(col * (col_width+args.gutter))
+            rm = args.margin+((args.cols-col-1) * (col_width+args.gutter))
+            # print(f'lm {lm}, rm {rm}')
+            print(f'%%leftmargin {lm}cm')
+            print(f'%%rightmargin {rm}cm')
+            print()
         print(line, end='')
-    # Notes
+    # Other headers if not in the notes section
+    elif re.match('[A-Za-z]:', line) and not in_tune:
+        print(line, end='')
+    # Comments
+    elif re.match('%', line):
+        print(line, end='')
+    # Notes, and not enough of them
     elif length_so_far < 2*metre:
 
-        #print('Metre', metre, 'Default length', default_length, file=sys.stderr)
+        in_tune = True
+
+        # print('Metre', metre, 'Default length', default_length, file=sys.stderr)
 
         # Dump leading bar marker
         line = re.sub(r'\s*\|:?\s*', '', line, count=1)
 
         for match in bar_pattern.finditer(line):
             bar = match.group('bar')
-            #print('Got bar', bar, file=sys.stderr)
+            # print('Got bar', bar, file=sys.stderr)
             length = bar_length(bar, default_length)
-            #print('Length', length, file=sys.stderr)
+            # print('Length', length, file=sys.stderr)
 
             print(bar, end='')
             length_so_far += length
             if length_so_far >= 2 * metre:
+                row += 1
+                if row >= args.rows:
+                    row = 0
+                    col += 1
+                    if col >= args.cols:
+                        col = 0
+                        page += 1
                 break
 
         print()
+
+print('%%multicol end')
