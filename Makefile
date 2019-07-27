@@ -112,4 +112,4 @@ dist/.midifiles: abc/*.abc
 # Copy the generated files to a web site
 .PHONY: website
 website: default dist/.abcfiles dist/.midifiles
-	scp -r $(targets) HEADER.html dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+	scp -r $(targets) index.html dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
