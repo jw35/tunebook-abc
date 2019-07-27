@@ -102,7 +102,14 @@ dist/.abcfiles: abc/*.abc header.abc copying.abc
 	)
 	touch dist/.abcfiles
 
+dist/.midifiles: abc/*.abc
+	mkdir -p dist/midi
+	(cd abc; \
+	 for f in `ls [0-9]*.abc`; do abc2midi "$${f}" -o ../dist/midi/$$(basename "$${f}" .abc).midi; done; \
+	)
+	touch dist/.midifiles
+
 # Copy the generated files to a web site
 .PHONY: website
-website: default dist/.abcfiles
-	scp -r $(targets) HEADER.html dist/abc jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+website: default dist/.abcfiles dist/.midifiles
+	scp -r $(targets) HEADER.html dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
