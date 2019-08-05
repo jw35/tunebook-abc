@@ -50,3 +50,6 @@ format flute.fmt
 
 % Include a copy of http://abcplus.sourceforge.net/guitarchords.fmt
 format guitarchords.fmt
+
+format mandolin.fmt
+tablature #7 pitch=G, 28 0 63 m_head m_note
