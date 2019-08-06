@@ -1,62 +1,86 @@
+% This definition of mandolin tablature is derived from one provided
+% by Jon Freeman at http://www.jonbanjo.com/temp/fmt.zip (see the discussion
+% at https://thesession.org/discussions/40837).
+%
+% This version was created by Jon Warbrick <jon.warbrick@googlemail.com>
+%
+% Define a tablature using the routines with something like
+%      tablature #1 pitch=G, 28 0 55 m_head m_note
+%
+% (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
+
 beginps
 
-/m_head{/Helvetica 10 selectfont
-	0 -5 M 90 rotate(Mandolin)show -90 rotate
-	pop
-	m_lines
-	newpath
-}!
+/m_head {                                        % pitch m_head
+    pop
+    /Helvetica 8 selectfont
+    0 5 M 90 rotate (MANDOLIN) show -90 rotate
+    m_lines
+    newpath
+} !
 
-/m_lines{
-  0 10 30 {
-      dup 10 exch moveto 660 exch lineto
-  }for
-      stroke
-}!
+/m_lines {
+    10 10 40 {
+        dup 10 exch M 680 exch lineto
+    } for stroke
+} !
 
-/m_fret{
-/Helvetica 20 selectfont
-jf_fret 9 gt {-15}{-8}ifelse 
-jf_string 10 mul moveto 
-%jf_fret 2 string cvs show
-jf_fret[(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)
-	(10) (11) (12) (13) (14) (15) (16) (17) (18) (19) (20)
-	(21) (22) (22) (23) (24) (25)]exch get show
-}!
+% show a string horizontally and vertically centred at current location
+% (inspired by https://stackoverflow.com/questions/3618194/how-to-determine-string-height-in-postscript)
+
+/m_ccshow {                                      % str m_ccshow
+    dup
+    gsave
+    newpath
+    0 0 M
+    true charpath flattenpath
+    pathbbox
+    grestore
+    3 -1 roll sub 2 div neg
+    3 1 roll sub 2 div exch
+    rmoveto
+    show
+} !
+
+/m_fret{                                         % fret string m_fret
+    /Helvetica 16 selectfont
+    1 add 10 mul 0 exch M
+    2 string cvs m_ccshow
+} !
 
 /m_nofret{
-/Helvetica 20 selectfont
--5 15 moveto (X) show
-}!
+    /Helvetica 16 selectfont
+    0 25 M (X) m_ccshow
+} !
 
-/m_note{gsave
-	-6 T 
-	/jf_note exch def
-	/jf_oct exch def
-	jf_oct 0 ge {
-	  jf_note 7 lt {
-	    /jf_string 0 def
-	    /jf_fret jf_note def
-	    }{
-	      jf_note 14 lt {
-		/jf_string 1 def
-		/jf_fret jf_note 7 sub def
-	      }{
-		jf_note 21 lt {
-		  /jf_string 2 def
-		  /jf_fret jf_note 14 sub def
-		}{
-		  /jf_string 3 def
-		  /jf_fret jf_note 21 sub def
-		  jf_oct 0 gt {/jf_fret jf_note 9 sub def}if %not sure why!
-		}ifelse
-	      }ifelse
-	    }ifelse
-	  m_fret
-	}{
-	  m_nofret
-	  }ifelse %oct
-	grestore
-}!
+/m_note{                                         % octave pitch x-offset m_note
+    gsave
+    0 T
+    /jf_note exch def
+    /jf_oct exch def
+    jf_oct 0 ge {
+        jf_note 7 lt {
+            jf_note 0 m_fret
+        }{
+            jf_note 14 lt {
+                jf_note 7 sub 1 m_fret
+            }{
+                jf_note 21 lt {
+                    jf_note 14 sub 2 m_fret
+                }{
+                    jf_oct 0 eq {
+                        jf_note 21 sub
+                    }{
+                        jf_note 9 sub
+                    } ifelse
+                    3 m_fret
+                } ifelse
+            } ifelse
+        } ifelse
+    }{
+        m_nofret
+    } ifelse
+    grestore
+} !
 
 endps
