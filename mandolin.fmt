@@ -7,21 +7,24 @@
 % Define a tablature using the routines with something like
 %      tablature #1 pitch=G, 28 0 55 m_head m_note
 %
-% (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
+% (FTI, various aliased operators (e.g. !, M, T, L, SLW) are provided by abcm2ps)
 
 beginps
 
 /m_head {                                        % pitch m_head
     pop
     /Helvetica 8 selectfont
-    0 5 M 90 rotate (MANDOLIN) show -90 rotate
-    newpath
+    0 4 M 90 rotate (MANDOLIN) show -90 rotate
 } !
 
-/m_lines {                                       % m_lines
+/m_lines {                                       % jf_x m_lines
+    0.5 SLW
     10 10 40 {
-        dup 10 exch M jf_x 10 add exch lineto
+        2 copy
+        10 exch M
+        10 add exch L
     } for stroke
+    pop % copy of jf_x
 } !
 
 % show a string horizontally and vertically centred at current location
@@ -79,7 +82,7 @@ beginps
     }{
         jf_x m_nofret
     } ifelse
-    m_lines
+    jf_x m_lines
     grestore
 } !
 
