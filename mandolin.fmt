@@ -44,7 +44,7 @@ beginps
 
 /m_fret{                                         % fret string m_fret
     /Helvetica 16 selectfont
-    1 add 10 mul 0 exch M
+    10 mul 0 exch M
     2 string cvs m_ccshow
 } !
 
@@ -60,20 +60,20 @@ beginps
     /jf_oct exch def
     jf_oct 0 ge {
         jf_note 7 lt {
-            jf_note 0 m_fret
+            jf_note 1 m_fret
         }{
             jf_note 14 lt {
-                jf_note 7 sub 1 m_fret
+                jf_note 7 sub 2 m_fret
             }{
                 jf_note 21 lt {
-                    jf_note 14 sub 2 m_fret
+                    jf_note 14 sub 3 m_fret
                 }{
                     jf_oct 0 eq {
                         jf_note 21 sub
                     }{
                         jf_note 9 sub
                     } ifelse
-                    3 m_fret
+                    4 m_fret
                 } ifelse
             } ifelse
         } ifelse
