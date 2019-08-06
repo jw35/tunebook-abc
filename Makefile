@@ -1,8 +1,10 @@
 targets = dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-tabs.pdf \
+dist/tunebook-mandolin.pdf \
 dist/cheatsheet.pdf \
-dist/cheatsheet-whistle.pdf
+dist/cheatsheet-whistle.pdf \
+dist/cheatsheet-mandolin.pdf
 
 .PHONY: default
 default: $(targets)
@@ -36,7 +38,7 @@ dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
 	exiftool -Title='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with guitar
-# chord diagrams and whistle tabs
+# chord diagrams and D whistle tabs
 dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py tunebook.fmt flute.fmt guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
@@ -46,8 +48,22 @@ dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T7 -T1 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Tabs' $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - D Wistle' $@
+
+# All the tunes as a printable score, one tune per page with guitar
+# chord diagrams and mandolin tabs
+dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/sorter.py tunebook.fmt mandolin.fmt guitarchords.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat mandolin.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref; \
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Mandolin' $@
 
 # The first few bars of all the tunes
 dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt
@@ -91,6 +107,27 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
+# The first few bars of all the tunes with mandolin fingering
+dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt mandolin.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat cheatsheet-mandolin.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%topspace 0.3cm'; \
+     echo '%%staffsep 0.7cm'; \
+     echo '%%titleformat T-1'; \
+     echo '%%maxshrink 0.9'; \
+     echo '%%musiconly 1'; \
+     echo '%%printtempo 0'; \
+     echo '%%titlefont * 16'; \
+     echo '%%subtitlefont * 13'; \
+     echo '%%scale 0.6'; \
+	 bin/sorter.py --title; \
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
+
 
 dist/.abcfiles: abc/*.abc header.abc copying.abc
 	mkdir -p dist/abc
@@ -112,4 +149,4 @@ dist/.midifiles: abc/*.abc
 # Copy the generated files to a web site
 .PHONY: website
 website: default dist/.abcfiles dist/.midifiles
-	scp -r $(targets) index.html dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+	scp -r $(targets) index.html .htaccess dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
