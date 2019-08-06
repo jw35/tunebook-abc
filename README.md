@@ -24,7 +24,7 @@ Makefile assumes that reasonably recent copies of the following programs are ava
 `$PATH` (all of which can be installed with Homebrew):
 
 * `abcm2ps` (https://github.com/leesavide/abcm2ps/, http://abcplus.sourceforge.net/#abcm2ps)
-* `abc2midi`
+* `abc2midi` (from the abcmidi package)
 * `dos2unix`
 * `ps2pdf` (from the Ghostscript package)
 * `python3`
