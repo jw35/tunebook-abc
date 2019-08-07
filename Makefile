@@ -110,7 +110,7 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
 # The first few bars of all the tunes with mandolin fingering
-dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt mandolin.fmt
+dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet-mandolin.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -127,7 +127,7 @@ dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copy
      echo '%%subtitlefont * 13'; \
      echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
 
 
