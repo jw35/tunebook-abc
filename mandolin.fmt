@@ -7,22 +7,24 @@
 % Define a tablature using the routines with something like
 %      tablature #1 pitch=G, 28 0 55 m_head m_note
 %
-% (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
+% (FTI, various aliased operators (e.g. !, M, T, L, SLW) are provided by abcm2ps)
 
 beginps
 
 /m_head {                                        % pitch m_head
     pop
     /Helvetica 8 selectfont
-    0 5 M 90 rotate (MANDOLIN) show -90 rotate
-    m_lines
-    newpath
+    0 4 M 90 rotate (MANDOLIN) show -90 rotate
 } !
 
-/m_lines {
+/m_lines {                                       % jf_x m_lines
+    0.5 SLW
     10 10 40 {
-        dup 10 exch M 680 exch lineto
+        2 copy
+        10 exch M
+        10 add exch L
     } for stroke
+    pop % copy of jf_x
 } !
 
 % show a string horizontally and vertically centred at current location
@@ -42,44 +44,45 @@ beginps
     show
 } !
 
-/m_fret{                                         % fret string m_fret
+/m_fret{                                         % fret string x-offset m_fret
     /Helvetica 16 selectfont
-    10 mul 0 exch M
+    exch 10 mul M
     2 string cvs m_ccshow
 } !
 
-/m_nofret{
+/m_nofret{                                       % x-offset m_nofret
     /Helvetica 16 selectfont
-    0 25 M (X) m_ccshow
+    25 M (X) m_ccshow
 } !
 
 /m_note{                                         % octave pitch x-offset m_note
     gsave
-    0 T
-    /jf_note exch def
+    /jf_x exch def
+    /jf_pitch exch def
     /jf_oct exch def
     jf_oct 0 ge {
-        jf_note 7 lt {
-            jf_note 1 m_fret
+        jf_pitch 7 lt {
+            jf_pitch 1 jf_x m_fret
         }{
-            jf_note 14 lt {
-                jf_note 7 sub 2 m_fret
+            jf_pitch 14 lt {
+                jf_pitch 7 sub 2 jf_x m_fret
             }{
-                jf_note 21 lt {
-                    jf_note 14 sub 3 m_fret
+                jf_pitch 21 lt {
+                    jf_pitch 14 sub 3 jf_x m_fret
                 }{
                     jf_oct 0 eq {
-                        jf_note 21 sub
+                        jf_pitch 21 sub
                     }{
-                        jf_note 9 sub
+                        jf_pitch 9 sub
                     } ifelse
-                    4 m_fret
+                    4 jf_x m_fret
                 } ifelse
             } ifelse
         } ifelse
     }{
-        m_nofret
+        jf_x m_nofret
     } ifelse
+    jf_x m_lines
     grestore
 } !
 

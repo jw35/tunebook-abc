@@ -17,6 +17,7 @@ fixup:
 
 # Create a concatenation for distribution
 dist/tunebook.abc: abc/*.abc header.abc copying.abc bin/sorter.py
+	mkdir -p dist
 	(echo '%abc-2.1'; \
      cat header.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
@@ -26,6 +27,7 @@ dist/tunebook.abc: abc/*.abc header.abc copying.abc bin/sorter.py
 
 # All the tunes as a printable score matching the published Tunebook
 dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
+	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
