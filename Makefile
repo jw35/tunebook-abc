@@ -90,7 +90,7 @@ dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -F  cheatsheet.fmt -O - | ps2pdf - $@
@@ -103,7 +103,7 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet-whistle.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
@@ -116,7 +116,7 @@ dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copy
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet-mandolin.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
@@ -129,7 +129,7 @@ dist/cheatsheet-dulcimer.pdf : abc/*.abc header.abc cheatsheet-dulcimer.abc copy
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet-dulcimer.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
