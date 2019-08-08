@@ -119,7 +119,7 @@ dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copy
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
 
 # The first few bars of all the tunes with dulcimer fingering
@@ -132,7 +132,7 @@ dist/cheatsheet-dulcimer.pdf : abc/*.abc header.abc cheatsheet-dulcimer.abc copy
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' $@
 
 
