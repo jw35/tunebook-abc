@@ -53,3 +53,6 @@ format guitarchords.fmt
 
 format mandolin.fmt
 tablature #7 pitch=G, 28 0 55 m_head m_note
+
+format dulcimer.fmt
+tablature #8 pitch=D 28 0 55 d_head d_note

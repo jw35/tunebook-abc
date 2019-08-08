@@ -2,9 +2,11 @@ targets = dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-tabs.pdf \
 dist/tunebook-mandolin.pdf \
+dist/tunebook-dulcimer.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-whistle.pdf \
-dist/cheatsheet-mandolin.pdf
+dist/cheatsheet-mandolin.pdf \
+dist/cheatsheet-dulcimer.pdf
 
 .PHONY: default
 default: $(targets)
@@ -67,6 +69,20 @@ dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/s
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Mandolin' $@
 
+# All the tunes as a printable score, one tune per page with guitar
+# chord diagrams and dilcimer tabs
+dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py tunebook.fmt dulcimer.fmt guitarchords.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat dulcimer.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref; \
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T8 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Dulcimer' $@
+
 # The first few bars of all the tunes
 dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
 	mkdir -p dist
@@ -105,6 +121,19 @@ dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copy
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
+
+# The first few bars of all the tunes with dulcimer fingering
+dist/cheatsheet-dulcimer.pdf : abc/*.abc header.abc cheatsheet-dulcimer.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat cheatsheet-dulcimer.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%scale 0.6'; \
+	 bin/sorter.py --title; \
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' $@
 
 
 dist/.abcfiles: abc/*.abc header.abc copying.abc

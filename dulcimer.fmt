@@ -1,0 +1,86 @@
+% This definition of dulcimer tablature is derived from one for the mandolin
+% provided by Jon Freeman at http://www.jonbanjo.com/temp/fmt.zip (see the
+% discussion at https://thesession.org/discussions/40837).
+%
+% This definition was created by Jon Warbrick <jon.warbrick@googlemail.com>
+%
+% Define a tablature using the routines with something like
+%      tablature #1 pitch=G, 28 0 55 d_head d_note
+%
+% (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
+
+beginps
+
+/d_width 689.6 def
+
+/d_head {                                        % pitch d_head
+    pop
+    /Helvetica 8 selectfont
+    0 0 M 90 rotate (DULCIMER) show -90 rotate
+    d_lines
+    newpath
+} !
+
+/d_lines {
+    10  9 M d_width  9 L stroke
+    10 11 M d_width 11 L stroke
+    10 20 M d_width 20   L stroke
+    10 30 M d_width 30   L stroke
+} !
+
+% show a string horizontally and vertically centred at current location
+% (inspired by https://stackoverflow.com/questions/3618194/how-to-determine-string-height-in-postscript)
+
+/d_ccshow {                                      % str d_ccshow
+    dup
+    gsave
+    newpath
+    0 0 M
+    true charpath flattenpath
+    pathbbox
+    grestore
+    3 -1 roll sub 2 div neg
+    3 1 roll sub 2 div exch
+    rmoveto
+    show
+} !
+
+/d_concat {                                      % (a) (b) d_concat -> (ab)
+    exch dup length
+    2 index length add string
+    dup dup 4 2 roll copy length
+    4 -1 roll putinterval
+} !
+
+/d_frettab [0 (X) 1 1.5 2 3 (X) 4 (X) 5 6 6.5] def
+
+/d_note{                                         % octave pitch x-offset d_note
+    gsave
+    0 T                                          % octave pitch
+    0 10 M
+    /Helvetica 16 selectfont
+    exch 0 eq {                                  % pitch
+        dup 12 mod                               % pitch pitch-within-octave
+        d_frettab exch get                       % pitch rel-fret
+        dup (X) eq {
+            exch                                 % (X) pitch
+            pop                                  % (X)
+        }
+        {
+            exch                                 % rel-fret pitch
+            12 idiv 7 mul add                    % abs-fret
+            dup dup                              % abs-fret abs-fret abs-fret
+            floor ne {                             % abs-fret
+                cvi 2 string cvs (+) d_concat
+            } if
+        } ifelse
+        3 string cvs d_ccshow
+    }
+    {                                            % pitch
+        pop
+        (X) d_ccshow
+    } ifelse
+    grestore
+} !
+
+endps
