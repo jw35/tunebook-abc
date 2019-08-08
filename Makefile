@@ -68,66 +68,42 @@ dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/s
 	exiftool -Title='Tunebook ABC - Mandolin' $@
 
 # The first few bars of all the tunes
-dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt
+dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%topspace 0.3cm'; \
-     echo '%%staffsep 0.7cm'; \
-     echo '%%titleformat T-1'; \
-     echo '%%maxshrink 0.9'; \
-     echo '%%musiconly 1'; \
-     echo '%%printtempo 0'; \
-     echo '%%titlefont * 16'; \
-     echo '%%subtitlefont * 13'; \
-     echo '%%scale 0.6'; \
+	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -O - | ps2pdf - $@
+	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -F  cheatsheet.fmt -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet' $@
 
 # The first few bars of all the tunes with whistle fingering
-dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt flute.fmt
+dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet-whistle.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%topspace 0.3cm'; \
-     echo '%%staffsep 0.7cm'; \
-     echo '%%titleformat T-1'; \
-     echo '%%maxshrink 0.9'; \
-     echo '%%musiconly 1'; \
-     echo '%%printtempo 0'; \
-     echo '%%titlefont * 16'; \
-     echo '%%subtitlefont * 13'; \
-     echo '%%scale 0.6'; \
+	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
 # The first few bars of all the tunes with mandolin fingering
-dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet-mandolin.fmt mandolin.fmt
+dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
 	 cat cheatsheet-mandolin.abc; echo; echo; \
 	 cat copying.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%topspace 0.3cm'; \
-     echo '%%staffsep 0.7cm'; \
-     echo '%%titleformat T-1'; \
-     echo '%%maxshrink 0.9'; \
-     echo '%%musiconly 1'; \
-     echo '%%printtempo 0'; \
-     echo '%%titlefont * 16'; \
-     echo '%%subtitlefont * 13'; \
-     echo '%%scale 0.6'; \
+	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
 
 
