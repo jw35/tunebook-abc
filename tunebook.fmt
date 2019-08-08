@@ -19,6 +19,8 @@ titlespace 0.1cm
 infospace 0.2cm
 stretchlast 1
 
+rbmax 5
+
 titleformat R-1 P-1 Q-1 T0 C1 G1 O1 T0 N1
 
 annotationfont Helvetica    12
