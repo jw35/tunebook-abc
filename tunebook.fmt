@@ -47,13 +47,8 @@ vocalfont      Times-Bold   13
 voicefont      Times-Bold   13
 wordsfont      Times        16
 
-diagram 1
-
 % Include a copy of abcm2ps's 'flute.fmt' for whistle tabs
 format flute.fmt
-
-% Include a copy of http://abcplus.sourceforge.net/guitarchords.fmt
-format guitarchords.fmt
 
 format mandolin.fmt
 tablature #7 pitch=G, 28 0 55 m_head m_note

@@ -52,7 +52,7 @@ dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T1 -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - D Wistle' $@
 
 # All the tunes as a printable score, one tune per page with guitar
@@ -66,12 +66,12 @@ dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/s
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Mandolin' $@
 
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and dilcimer tabs
-dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py tunebook.fmt dulcimer.fmt guitarchords.fmt
+dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -80,7 +80,7 @@ dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/s
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -T8 -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | tee foo.ps | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Dulcimer' $@
 
 # The first few bars of all the tunes

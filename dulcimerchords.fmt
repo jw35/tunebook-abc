@@ -1,0 +1,379 @@
+% dulcimer.fmt -*- ps -*-
+
+% This format file provides basic dulcimer chord diagrams.
+
+% Writen by Jn Warbrick <jon.warbrick@googlemail.com>.
+% It is based on guitarchords.fmt:
+
+% Original code by Jean-Fran\,cois Moine,
+% extended and documented by Guido Gonzato.
+
+% Version 1.3
+% Latest update: May 14, 2018
+% License: GNU GPL 2.
+
+% ADDING NEW CHORDS
+%
+% To add new chords, use the provided routines and variables:
+%
+%   slwXX      - set line width
+%   s1...s3    - define X position of strings
+%   fboard     - draws the fingerboard
+%   nut        - draws the fingerboard nut
+%   fr1...fr5  - print the fret modifier
+%   f1...f4    - print the # of finger to use
+%   X go       - draws a circle (open string) at X
+%   X gx       - draws a cross (mute string) at X
+%   X Y gdot   - draws a solid circle (finger position) at X,Y
+%   sXfY       - draws finger position at string X, fret Y; e.g. 's1f3'
+%   barre1N    - draw barre from string 1 to string N
+%
+% Each chord is implemented writing a new PostScript routine that
+% uses 3 or 4 lines of code, for plain or barre chords respectively.
+%
+% - line #1: 'fboard' followed by 'nut' or fret modifier 'fr1'...'fr5';
+%
+% - line #2: use 'gx' and 'go' to specify mute or open strings, if any,
+%   and 'f1'...'f4' to specify the fingers to use;
+%
+% - line #3: print fingerings using 'sXfY' ('string X, fret Y')
+%   routines. Coordinates on the fingerboard are defined as follows:
+%
+%    D      A      D
+%   ------------------  nut or fret
+%   s3f1   s2f1   s2f1
+%   ------------------  fret
+%   s3f2   s2f2   s2f2
+%   ------------------  fret
+%   s3f3   s2f3   s2f3
+%   ------------------  fret
+%
+% - line #4 (barre chords only): use 'barre1N' (N=2...3) to draw
+%   a barre from string 1 to N.
+%
+% Example: let's implement the A chord. We start with the PostScript
+% routine definition, which we'll call simply "A":
+%
+%   /A{
+%
+% now let's add the first line of code. The standard A chord is not barre,
+% so we'll add the routines for drawing the fingerboard and the nut:
+%
+%   /A{
+%      fboard nut
+%
+% Now let's print the fingers to use above the fingerboard.
+% The standard A chord is played with the middle finger on the 1st
+% string. 's1 mf' ('string 2 middle finger') prints 'M' above string 1.
+% The thumb is on the 3rd string, hence 's3 tm'. We then add the second
+% line of code:
+%
+%   /A{
+%      fboard nut
+%      s1 mf s3 tm
+%
+% Fingers positions on the fretboard are 's1mf' for middle finger on
+% string 1, 's3tm' for thumb on string 3. We can add the third line of
+% code:
+%
+%   /A{
+%      fboard nut
+%      s2 f1 s4 f2 s5 f3
+%      s1mf s3tm
+%
+% and finish the routine:
+%
+%   /A{
+%      fboard nut
+%      s2 f1 s4 f2 s5 f3
+%      s1mf s3tm
+%      grestore}! % ! is defined as 'bind def' by abcm2ps
+%
+% Finally, we implement a decoration that uses the C PostScript routine:
+%
+%   deco A 3 A 38 0 0
+%
+% (see abcm2ps docs for an explanation of %%deco)
+% http://moinejf.free.fr/abcm2ps-doc/deco.xhtml
+% We can now use the !C! decoration to print the C chord diagram.
+%
+% Please note that adapting this code to other stringed instruments
+% is quite easy!
+
+% ==  PostScript routines ==
+
+beginps
+
+  % set line width
+  /slw02{0.2 setlinewidth}!
+  /slw04{0.4 setlinewidth}!
+  /slw05{0.5 setlinewidth}!
+  /slw09{0.9 setlinewidth}!
+  /slw16{1.6 setlinewidth}!
+
+  % string X coordinates
+  /s1  12 def
+  /s2  6 def
+  /s3  0 def
+
+  % draw the nut
+  /nut{slw16 -0.2 24.5 M s1 0.4 add 0 RL stroke slw05}!
+
+  % draw lines
+  /RL24{0 24 RL}!
+  /RL20{s1 0 RL}!
+
+  % draw the fingerboard
+  /fboard{
+     gsave exch s1 2 idiv sub exch 8 add T
+     % draw frets
+     0 0  M RL20
+     0 6  M RL20
+     0 12 M RL20
+     0 18 M RL20
+     0 24 M RL20 stroke
+     % draw strings
+     slw04
+     s3 0 M RL24 s2 0 M RL24 s1 0 M RL24
+     stroke slw05}!
+
+  % X Y gdot - dot for fingerboard
+  /gdot{newpath 1.4 0 360 arc fill}!
+
+  % X gx - mute string at X, 28 (above the fingerboard)
+  /gx{slw02 28 M -1.2 -1.6 RM 2.4 3.2 RL
+      0 -3.2 RM -2.4 3.2 RL stroke}!
+
+  % X go - open string at X, 28
+  /go{slw02 28 newpath 1.3 0 360 arc stroke}!
+
+  % X f1...f4 - print finger to use at X, 26
+  /thumb{2 sub 26 M /Helvetica 6 selectfont (T) show}!
+  /indexf{2 sub 26 M /Helvetica 6 selectfont (I) show}!
+  /middlef{2 sub 26 M /Helvetica 6 selectfont (M) show}!
+  /ringf{2 sub 26 M /Helvetica 6 selectfont (R) show}!
+
+  % fret modifiers
+  /fr1{-11 15 M /Helvetica-Italics 7 selectfont (fr1) show}!
+  /fr2{-11 15 M /Helvetica-Italics 7 selectfont (fr2) show}!
+  /fr3{-11 15 M /Helvetica-Italics 7 selectfont (fr3) show}!
+  /fr4{-11 15 M /Helvetica-Italics 7 selectfont (fr4) show}!
+  /fr5{-11 15 M /Helvetica-Italics 7 selectfont (fr5) show}!
+  /fr6{-11 15 M /Helvetica-Italics 7 selectfont (fr6) show}!
+
+  % barre from string to string - e.g. barre16 for complete barre
+  /barre13{s3 21 gdot s1 21 gdot slw09 s3 21 M  8 0 RL stroke}!
+  /barre12{s2 21 gdot s1 21 gdot slw09 s2 21 M  4 0 RL stroke}!
+
+  % sXfY = draw dot at string X, fret Y
+  % fret 1
+  /s1f1{s1  21 gdot}!
+  /s2f1{s2  21 gdot}!
+  /s3f1{s3  21 gdot}!
+  % fret 2
+  /s1f2{s1  15 gdot}!
+  /s2f2{s2  15 gdot}!
+  /s3f2{s3  15 gdot}!
+  % fret 3
+  /s1f3{s1   9 gdot}!
+  /s2f3{s2   9 gdot}!
+  /s3f3{s3   9 gdot}!
+  % fret 4
+  /s1f4{s1   3 gdot}!
+  /s2f4{s2   3 gdot}!
+  /s3f4{s3   3 gdot}!
+
+  % chord diagrams mostly follow those described at
+  % https://www.davidbeede.com/simpledulcimerchords.htm
+  % or Neil Hellman's Dulcimer Chord Book (MelBray Publications)
+  % for an instrument WITHOUIT a "1 1/2" fret
+  % open strings are not indicated (redundant!)
+
+  /D{
+    fboard nut
+    s1f2
+    grestore}!
+  /A{
+    fboard nut
+    s1f1 s3f1
+    grestore}!
+  /G{
+    fboard nut
+    s1f3 s2f1
+    grestore}!
+  /Bm{
+    fboard nut
+    s1f2 s2f1
+    grestore}!
+  /F#m {
+    fboard nut
+    s1f2 s2f2 s3f4
+    grestore}!
+  /A7{
+    fboard nut
+    s1f3 s3f1
+    grestore}!
+  /Em{
+    fboard nut
+    s1f3 s2f1 s3f1
+    grestore}!
+  /E7 {
+    fboard nut
+    s1f1 s2f3 s3f1
+    grestore}!
+  /C{
+    fboard fr3
+    s1f1 s2f2 s3f4
+    grestore}!
+  /Am{
+    fboard nut
+    s1f1 s3f1
+    grestore}!
+  /Gm{
+    fboard nut
+    s1f3 s2f3 s1f3
+    grestore}!
+  /E{
+    fboard nut
+    s1f1 s2f1 s3f1
+    grestore}!
+  /B{
+    fboard nut
+    grestore}!
+  /F#{
+    fboard nut
+    grestore}!
+
+
+endps
+
+% == Decoration definitions ==
+
+deco C     3 C     38 0 0
+deco Cm    3 Cm    38 0 0
+deco C7    3 C7    38 0 0
+deco Cm7   3 Cm7   38 0 0
+deco Cmaj7 3 Cmaj7 38 0 0
+deco Csus4 3 Csus4 38 0 0
+%
+deco C#     3 C#     38 0 0
+deco C#m    3 C#m    38 0 0
+deco C#7    3 C#7    38 0 0
+deco C#m7   3 C#m7   38 0 0
+deco C#maj7 3 C#maj7 38 0 0
+deco C#sus4 3 C#sus4 38 0 0
+%
+deco Db     3 C#     38 0 0
+deco Dbm    3 C#m    38 0 0
+deco Db7    3 C#7    38 0 0
+deco Dbm7   3 C#m7   38 0 0
+deco Dbmaj7 3 C#maj7 38 0 0
+deco Dbsus4 3 C#sus4 38 0 0
+%
+deco D     3 D     38 0 0
+deco Dm    3 Dm    38 0 0
+deco D7    3 D7    38 0 0
+deco Dm7   3 Dm7   38 0 0
+deco Dmaj7 3 Dmaj7 38 0 0
+deco Dsus4 3 Dsus4 38 0 0
+%
+deco D#     3 D#     38 0 0
+deco D#m    3 D#m    38 0 0
+deco D#7    3 D#7    38 0 0
+deco D#m7   3 D#m7   38 0 0
+deco D#maj7 3 D#maj7 38 0 0
+deco D#sus4 3 D#sus4 38 0 0
+%
+deco Eb     3 D#     38 0 0
+deco Ebm    3 D#m    38 0 0
+deco Eb7    3 D#7    38 0 0
+deco Ebm7   3 D#m7   38 0 0
+deco Ebmaj7 3 D#maj7 38 0 0
+deco Ebsus4 3 D#sus4 38 0 0
+%
+deco E     3 E     38 0 0
+deco Em    3 Em    38 0 0
+deco E7    3 E7    38 0 0
+% alternate E7 chord:
+% deco E7    3 E7_alt    38 0 0
+deco Em7   3 Em7   38 0 0
+% alternate Em7 chord:
+% deco Em7    3 Em7_alt    38 0 0
+deco Emaj7 3 Emaj7 38 0 0
+deco Esus4 3 Esus4 38 0 0
+%
+deco F     3 F     38 0 0
+deco Fm    3 Fm    38 0 0
+deco F7    3 F7    38 0 0
+deco Fm7   3 Fm7   38 0 0
+deco Fmaj7 3 Fmaj7 38 0 0
+deco Fsus4 3 Fsus4 38 0 0
+%
+deco F#     3 F#     38 0 0
+deco F#m    3 F#m    38 0 0
+deco F#7    3 F#7    38 0 0
+deco F#m7   3 F#m7   38 0 0
+deco F#maj7 3 F#maj7 38 0 0
+deco F#sus4 3 F#sus4 38 0 0
+%
+deco Gb     3 F#     38 0 0
+deco Gbm    3 F#m    38 0 0
+deco Gb7    3 F#7    38 0 0
+deco Gbm7   3 F#m7   38 0 0
+deco Gbmaj7 3 F#maj7 38 0 0
+deco Gbsus4 3 F#sus4 38 0 0
+%
+deco G     3 G     38 0 0
+% alternate G chord:
+% deco G  3 G_alt  38 0 0
+deco Gm    3 Gm    38 0 0
+deco G7    3 G7    38 0 0
+deco Gm7   3 Gm7   38 0 0
+deco Gmaj7 3 Gmaj7 38 0 0
+% alternate Gmaj7 chord:
+% deco G  3 Gmaj7_alt  38 0 0
+deco Gsus4 3 Gsus4 38 0 0
+%
+deco G#     3 G#     38 0 0
+deco G#m    3 G#m    38 0 0
+deco G#7    3 G#7    38 0 0
+deco G#m7   3 G#m7   38 0 0
+deco G#maj7 3 G#maj7 38 0 0
+deco G#sus4 3 G#sus4 38 0 0
+%
+deco Ab     3 G#     38 0 0
+deco Abm    3 G#m    38 0 0
+deco Ab7    3 G#7    38 0 0
+deco Abm7   3 G#m7   38 0 0
+deco Abmaj7 3 G#maj7 38 0 0
+deco Absus4 3 G#sus4 38 0 0
+%
+deco A     3 A     38 0 0
+deco Am    3 Am    38 0 0
+deco A7    3 A7    38 0 0
+deco Am7   3 Am7   38 0 0
+deco Amaj7 3 Amaj7 38 0 0
+deco Asus4 3 Asus4 38 0 0
+%
+deco A#     3 A#     38 0 0
+deco A#m    3 A#m    38 0 0
+deco A#7    3 A#7    38 0 0
+deco A#m7   3 A#m7   38 0 0
+deco A#maj7 3 A#maj7 38 0 0
+deco A#sus4 3 A#sus4 38 0 0
+%
+deco Bb     3 A#     38 0 0
+deco Bbm    3 A#m    38 0 0
+deco Bb7    3 A#7    38 0 0
+deco Bbm7   3 A#m7   38 0 0
+deco Bbmaj7 3 A#maj7 38 0 0
+deco Bbsus4 3 A#sus4 38 0 0
+%
+deco B     3 B     38 0 0
+deco Bm    3 Bm    38 0 0
+deco B7    3 B7    38 0 0
+deco Bm7   3 Bm7   38 0 0
+deco Bmaj7 3 Bmaj7 38 0 0
+deco Bsus4 3 Bsus4 38 0 0
+
+% --- End of file guitarchords.fmt
