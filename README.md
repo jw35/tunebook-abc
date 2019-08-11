@@ -31,6 +31,8 @@ Makefile assumes that reasonably recent copies of the following programs are ava
 * `git`
 * `tclsh` (from the tcl cask)
 * `exiftool`
+* `fluidsynth`
+* `lame`
 
 This work was lagely inspired by [Paul Hardy's Tunebooks](http://www.pghardy.net/concertina/tunebooks/)
 and his [tunebook processs page](http://www.pghardy.net/concertina/tunebooks/tunebook_process.html) heavily

@@ -9,6 +9,11 @@ dist/cheatsheet-whistle.pdf \
 dist/cheatsheet-mandolin.pdf \
 dist/cheatsheet-dulcimer.pdf
 
+abc_source := $(wildcard abc/[0-9]*.abc)
+abc_targets := $(patsubst abc/%,dist/abc/%,$(abc_source))
+midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
+mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
+
 .PHONY: default
 default: $(targets)
 
@@ -16,10 +21,10 @@ default: $(targets)
 # fixes them
 .PHONY: fixup
 fixup:
-	dos2unix abc/*.abc
+	dos2unix $(abc_source)
 
 # Create a concatenation for distribution
-dist/tunebook.abc: abc/*.abc header.abc copying.abc bin/sorter.py
+dist/tunebook.abc: $(abc_source) header.abc copying.abc bin/sorter.py
 	mkdir -p dist
 	(echo '%abc-2.1'; \
      cat header.abc; echo; echo; \
@@ -29,7 +34,7 @@ dist/tunebook.abc: abc/*.abc header.abc copying.abc bin/sorter.py
 	) > $@
 
 # All the tunes as a printable score matching the published Tunebook
-dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
+dist/tunebook.pdf : $(abc_source) header.abc copying.abc bin/sorter.py tunebook.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -46,7 +51,7 @@ dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
 
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and D whistle tabs
-dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
+dist/tunebook-tabs.pdf : $(abc_source) header.abc tabs.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -59,7 +64,7 @@ dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py
 	exiftool -Title='Tunebook ABC - D Wistle' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
-dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
+dist/tunebook-mandolin.pdf : $(abc_source) header.abc mandolin.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -73,7 +78,7 @@ dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/s
 
 # All the tunes as a printable score, one tune per page with dulcimer
 # chord diagrams and dulcimer tabs
-dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+dist/tunebook-dulcimer.pdf : $(abc_source) header.abc dulcimer.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -86,7 +91,7 @@ dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/s
 	exiftool -Title='Tunebook ABC - Dulcimer' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
-dist/tunebook-ukulele.pdf : abc/*.abc header.abc ukulele.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
+dist/tunebook-ukulele.pdf : $(abc_source) header.abc ukulele.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -101,7 +106,7 @@ dist/tunebook-ukulele.pdf : abc/*.abc header.abc ukulele.abc copying.abc bin/sor
 ## Cheatsheets
 
 # The first few bars of all the tunes
-dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
+dist/cheatsheet.pdf : $(abc_source) header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -114,7 +119,7 @@ dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter
 	exiftool -Title='Tunebook ABC - Cheatsheet' $@
 
 # The first few bars of all the tunes with whistle fingering
-dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
+dist/cheatsheet-whistle.pdf : $(abc_source) header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -127,7 +132,7 @@ dist/cheatsheet-whistle.pdf : abc/*.abc header.abc cheatsheet-whistle.abc copyin
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
 
 # The first few bars of all the tunes with mandolin fingering
-dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
+dist/cheatsheet-mandolin.pdf : $(abc_source) header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -140,7 +145,7 @@ dist/cheatsheet-mandolin.pdf : abc/*.abc header.abc cheatsheet-mandolin.abc copy
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
 
 # The first few bars of all the tunes with dulcimer fingering
-dist/cheatsheet-dulcimer.pdf : abc/*.abc header.abc cheatsheet-dulcimer.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -153,7 +158,7 @@ dist/cheatsheet-dulcimer.pdf : abc/*.abc header.abc cheatsheet-dulcimer.abc copy
 	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' $@
 
 
-dist/.abcfiles: abc/*.abc header.abc copying.abc
+dist/.abcfiles: $(abc_source) header.abc copying.abc
 	mkdir -p dist/abc
 	(cd abc; \
 	 for f in `ls [0-9]*.abc`; do ( \
@@ -163,14 +168,26 @@ dist/.abcfiles: abc/*.abc header.abc copying.abc
 	)
 	touch dist/.abcfiles
 
-dist/.midifiles: abc/*.abc
+dist/.midifiles: $(abc_source)
 	mkdir -p dist/midi
 	(cd abc; \
 	 for f in `ls [0-9]*.abc`; do abc2midi "$${f}" -o ../dist/midi/$$(basename "$${f}" .abc).midi; done; \
 	)
 	touch dist/.midifiles
 
+dist/.mp3files: dist/.midifiles
+	mkdir -p dist/mp3
+	(cd dist/midi; \
+	 for f in `ls [0-9]*.midi`; do fluidsynth -F tmp.wav ../../GeneralUser_GS_v1.471.sf2 "$${f}"; lame tmp.wav ../../dist/mp3/$$(basename "$${f}" .midi).mp3; rm tmp.wav; done; \
+	)
+	touch dist/.mp3files
+
 # Copy the generated files to a web site
 .PHONY: website
-website: default dist/.abcfiles dist/.midifiles
-	scp -r $(targets) index.html .htaccess dist/abc dist/midi jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+website: default dist/.abcfiles dist/.midifiles dist/.mp3files
+	scp -r $(targets) index.html .htaccess jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
+	(cd dist; \
+		rsync -av abc/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/abc; \
+		rsync -av midi/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/midi; \
+		rsync -av mp3/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/mp3; \
+	)
