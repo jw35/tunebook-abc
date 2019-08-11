@@ -3,6 +3,7 @@ dist/tunebook.pdf \
 dist/tunebook-tabs.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer.pdf \
+dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-whistle.pdf \
 dist/cheatsheet-mandolin.pdf \
@@ -82,6 +83,21 @@ dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/s
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | tee foo.ps | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Dulcimer' $@
+
+# All the tunes as a printable score, one tune per page with ukulele chords
+dist/tunebook-ukulele.pdf : abc/*.abc header.abc ukulele.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat ukulele.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref; \
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Dulcimer' $@
+
+## Cheatsheets
 
 # The first few bars of all the tunes
 dist/cheatsheet.pdf : abc/*.abc header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
