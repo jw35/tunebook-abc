@@ -42,9 +42,11 @@ dist/tunebook.pdf : abc/*.abc header.abc copying.abc bin/sorter.py tunebook.fmt
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' $@
 
+## Tablatures and chords
+
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and D whistle tabs
-dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py tunebook.fmt flute.fmt guitarchords.fmt
+dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -56,9 +58,8 @@ dist/tunebook-tabs.pdf : abc/*.abc header.abc tabs.abc copying.abc bin/sorter.py
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - D Wistle' $@
 
-# All the tunes as a printable score, one tune per page with guitar
-# chord diagrams and mandolin tabs
-dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/sorter.py tunebook.fmt mandolin.fmt guitarchords.fmt
+# All the tunes as a printable score, one tune per page with mandolin tabs
+dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
@@ -67,12 +68,12 @@ dist/tunebook-mandolin.pdf : abc/*.abc header.abc mandolin.abc copying.abc bin/s
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T7 -O - | ps2pdf - $@
+	) | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Mandolin' $@
 
-# All the tunes as a printable score, one tune per page with guitar
-# chord diagrams and dilcimer tabs
-dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+# All the tunes as a printable score, one tune per page with dulcimer
+# chord diagrams and dulcimer tabs
+dist/tunebook-dulcimer.pdf : abc/*.abc header.abc dulcimer.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat header.abc; echo; echo; \
