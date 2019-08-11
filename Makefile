@@ -87,7 +87,7 @@ dist/tunebook-dulcimer.pdf : $(abc_source) header.abc dulcimer.abc copying.abc b
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | tee foo.ps | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Dulcimer' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
