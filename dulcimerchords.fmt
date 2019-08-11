@@ -2,7 +2,7 @@
 
 % This format file provides basic dulcimer chord diagrams.
 
-% Writen by Jn Warbrick <jon.warbrick@googlemail.com>.
+% Writen by Jon Warbrick <jon.warbrick@googlemail.com>.
 % It is based on guitarchords.fmt:
 
 % Original code by Jean-Fran\,cois Moine,
@@ -183,35 +183,46 @@ beginps
   /s2f4{s2   3 gdot}!
   /s3f4{s3   3 gdot}!
 
+  /nochord{
+    fboard nut
+    s3 2 add 8 M /Helvetica 13 selectfont (X) show
+    grestore}!
+
   % chord diagrams mostly follow those described at
   % https://www.davidbeede.com/simpledulcimerchords.htm
   % or Neil Hellman's Dulcimer Chord Book (MelBray Publications)
   % for an instrument WITHOUIT a "1 1/2" fret
   % open strings are not indicated (redundant!)
 
-  /D{
-    fboard nut
-    s1f2
-    grestore}!
+  % Currently only chords used in the tunebook are defined...
+
   /A{
     fboard nut
     s1f1 s3f1
     grestore}!
-  /G{
+  /Am{
+    A}!
+  /B{
+    nochord}!
+  /A7{
     fboard nut
-    s1f3 s2f1
+    s1f3 s3f1
     grestore}!
   /Bm{
     fboard nut
     s1f2 s2f1
     grestore}!
-  /F#m {
-    fboard nut
-    s1f2 s2f2 s3f4
+  /C{
+    fboard fr3
+    s1f1 s2f2 s3f4
     grestore}!
-  /A7{
+  /D{
     fboard nut
-    s1f3 s3f1
+    s1f2
+    grestore}!
+  /E{
+    fboard nut
+    s1f1 s2f1 s3f1
     grestore}!
   /Em{
     fboard nut
@@ -221,159 +232,38 @@ beginps
     fboard nut
     s1f1 s2f3 s3f1
     grestore}!
-  /C{
-    fboard fr3
-    s1f1 s2f2 s3f4
-    grestore}!
-  /Am{
+  /F#{
+    nochord}!
+  /F#m {
     fboard nut
-    s1f1 s3f1
+    s1f2 s2f2 s3f4
+    grestore}!
+  /G{
+    fboard nut
+    s1f3 s2f1
     grestore}!
   /Gm{
     fboard nut
-    s1f3 s2f3 s1f3
+    s1f3 s2f3 s3f3
     grestore}!
-  /E{
-    fboard nut
-    s1f1 s2f1 s3f1
-    grestore}!
-  /B{
-    fboard nut
-    grestore}!
-  /F#{
-    fboard nut
-    grestore}!
-
 
 endps
 
 % == Decoration definitions ==
 
 deco C     3 C     38 0 0
-deco Cm    3 Cm    38 0 0
-deco C7    3 C7    38 0 0
-deco Cm7   3 Cm7   38 0 0
-deco Cmaj7 3 Cmaj7 38 0 0
-deco Csus4 3 Csus4 38 0 0
-%
-deco C#     3 C#     38 0 0
-deco C#m    3 C#m    38 0 0
-deco C#7    3 C#7    38 0 0
-deco C#m7   3 C#m7   38 0 0
-deco C#maj7 3 C#maj7 38 0 0
-deco C#sus4 3 C#sus4 38 0 0
-%
-deco Db     3 C#     38 0 0
-deco Dbm    3 C#m    38 0 0
-deco Db7    3 C#7    38 0 0
-deco Dbm7   3 C#m7   38 0 0
-deco Dbmaj7 3 C#maj7 38 0 0
-deco Dbsus4 3 C#sus4 38 0 0
-%
 deco D     3 D     38 0 0
-deco Dm    3 Dm    38 0 0
-deco D7    3 D7    38 0 0
-deco Dm7   3 Dm7   38 0 0
-deco Dmaj7 3 Dmaj7 38 0 0
-deco Dsus4 3 Dsus4 38 0 0
-%
-deco D#     3 D#     38 0 0
-deco D#m    3 D#m    38 0 0
-deco D#7    3 D#7    38 0 0
-deco D#m7   3 D#m7   38 0 0
-deco D#maj7 3 D#maj7 38 0 0
-deco D#sus4 3 D#sus4 38 0 0
-%
-deco Eb     3 D#     38 0 0
-deco Ebm    3 D#m    38 0 0
-deco Eb7    3 D#7    38 0 0
-deco Ebm7   3 D#m7   38 0 0
-deco Ebmaj7 3 D#maj7 38 0 0
-deco Ebsus4 3 D#sus4 38 0 0
-%
 deco E     3 E     38 0 0
 deco Em    3 Em    38 0 0
 deco E7    3 E7    38 0 0
-% alternate E7 chord:
-% deco E7    3 E7_alt    38 0 0
-deco Em7   3 Em7   38 0 0
-% alternate Em7 chord:
-% deco Em7    3 Em7_alt    38 0 0
-deco Emaj7 3 Emaj7 38 0 0
-deco Esus4 3 Esus4 38 0 0
-%
-deco F     3 F     38 0 0
-deco Fm    3 Fm    38 0 0
-deco F7    3 F7    38 0 0
-deco Fm7   3 Fm7   38 0 0
-deco Fmaj7 3 Fmaj7 38 0 0
-deco Fsus4 3 Fsus4 38 0 0
-%
 deco F#     3 F#     38 0 0
 deco F#m    3 F#m    38 0 0
-deco F#7    3 F#7    38 0 0
-deco F#m7   3 F#m7   38 0 0
-deco F#maj7 3 F#maj7 38 0 0
-deco F#sus4 3 F#sus4 38 0 0
-%
-deco Gb     3 F#     38 0 0
-deco Gbm    3 F#m    38 0 0
-deco Gb7    3 F#7    38 0 0
-deco Gbm7   3 F#m7   38 0 0
-deco Gbmaj7 3 F#maj7 38 0 0
-deco Gbsus4 3 F#sus4 38 0 0
-%
 deco G     3 G     38 0 0
-% alternate G chord:
-% deco G  3 G_alt  38 0 0
 deco Gm    3 Gm    38 0 0
-deco G7    3 G7    38 0 0
-deco Gm7   3 Gm7   38 0 0
-deco Gmaj7 3 Gmaj7 38 0 0
-% alternate Gmaj7 chord:
-% deco G  3 Gmaj7_alt  38 0 0
-deco Gsus4 3 Gsus4 38 0 0
-%
-deco G#     3 G#     38 0 0
-deco G#m    3 G#m    38 0 0
-deco G#7    3 G#7    38 0 0
-deco G#m7   3 G#m7   38 0 0
-deco G#maj7 3 G#maj7 38 0 0
-deco G#sus4 3 G#sus4 38 0 0
-%
-deco Ab     3 G#     38 0 0
-deco Abm    3 G#m    38 0 0
-deco Ab7    3 G#7    38 0 0
-deco Abm7   3 G#m7   38 0 0
-deco Abmaj7 3 G#maj7 38 0 0
-deco Absus4 3 G#sus4 38 0 0
-%
 deco A     3 A     38 0 0
 deco Am    3 Am    38 0 0
 deco A7    3 A7    38 0 0
-deco Am7   3 Am7   38 0 0
-deco Amaj7 3 Amaj7 38 0 0
-deco Asus4 3 Asus4 38 0 0
-%
-deco A#     3 A#     38 0 0
-deco A#m    3 A#m    38 0 0
-deco A#7    3 A#7    38 0 0
-deco A#m7   3 A#m7   38 0 0
-deco A#maj7 3 A#maj7 38 0 0
-deco A#sus4 3 A#sus4 38 0 0
-%
-deco Bb     3 A#     38 0 0
-deco Bbm    3 A#m    38 0 0
-deco Bb7    3 A#7    38 0 0
-deco Bbm7   3 A#m7   38 0 0
-deco Bbmaj7 3 A#maj7 38 0 0
-deco Bbsus4 3 A#sus4 38 0 0
-%
 deco B     3 B     38 0 0
 deco Bm    3 Bm    38 0 0
-deco B7    3 B7    38 0 0
-deco Bm7   3 Bm7   38 0 0
-deco Bmaj7 3 Bmaj7 38 0 0
-deco Bsus4 3 Bsus4 38 0 0
 
 % --- End of file guitarchords.fmt
