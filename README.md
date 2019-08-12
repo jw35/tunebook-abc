@@ -41,15 +41,29 @@ informed the processing pipeline.
 Licensing
 ---------
 
-This transcription and the subsequent processing is the work of
-Jon Warbrick jon.warbrick@googlemail.com.
-The transcription work is licensed under the Creative Commons
+The contents of this repository is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+In addition, the transcribed ABC files and the results of processing them
+into various other formats distributed from https://brsn.org.uk/tunebook-abc/
+is also licensed under the Creative Commons
 '[Attribution ShareAlike (CC BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/)'
 licence, which means you can
 "remix, tweak, and build upon" this work even for commercial purposes,
-as long as you credit the original authors and license your new creations under the identical terms. The licensing of the Tuneworks Tunebook on which
+as long as you credit the original authors and license your new creations under the identical terms.
+
+The licensing of the Tuneworks Tunebook on which
 this work is based is unclear, other than it saying:
 
 >"The book is downloadable from http://www.tuneworks.co.uk/.
 >Please feel free to use it as widely as you like".
 
+This transcription and the subsequent processing is the work of
+Jon Warbrick jon.warbrick@googlemail.com.
