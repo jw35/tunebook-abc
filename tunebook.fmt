@@ -35,7 +35,7 @@ infofont       Helvetica-Italic 14
 measurefont    Times-Italic 10
 partsfont      Times        15
 repeatfont     Times        13
-setfont-1      Times        12
+setfont-1      Times-Bold   18
 setfont-2      Times        12
 setfont-3      Times        12
 setfont-4      Times        12

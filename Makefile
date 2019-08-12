@@ -1,5 +1,8 @@
 targets = dist/tunebook.abc \
 dist/tunebook.pdf \
+dist/tunebook-bflat.pdf \
+dist/tunebook-eflat.pdf \
+dist/tunebook-base.pdf \
 dist/tunebook-tabs.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer.pdf \
@@ -43,6 +46,51 @@ dist/tunebook.pdf : $(abc_source) header.abc copying.abc bin/sorter.py tunebook.
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' $@
+
+# All the tunes as a printable score matching the published Tunebook in Bb
+dist/tunebook-bflat.pdf : $(abc_source) header.abc copying.abc bflat.abc bin/sorter.py tunebook.fmt bflat.abc
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat bflat.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --paginate; \
+	) | abcm2ps - -i -F tunebook.fmt -F bflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
+	exiftool -Title='Tunebook ABC in Bb' $@
+
+# All the tunes as a printable score matching the published Tunebook in Eb
+dist/tunebook-eflat.pdf : $(abc_source) header.abc copying.abc eflat.abc bin/sorter.py tunebook.fmt eflat.abc
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat eflat.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --paginate; \
+	) | abcm2ps - -i -F tunebook.fmt -F eflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
+	exiftool -Title='Tunebook ABC in Eb' $@
+
+# All the tunes as a printable score matching the published Tunebook in the base clef
+dist/tunebook-base.pdf : $(abc_source) header.abc copying.abc base.abc bin/sorter.py tunebook.fmt base.abc
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat header.abc; echo; echo; \
+	 cat base.abc; echo; echo; \
+	 cat copying.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --paginate; \
+	) | abcm2ps - -i -F tunebook.fmt -F base.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
+	exiftool -Title='Tunebook ABC in the base clef' $@
 
 ## Tablatures and chords
 
