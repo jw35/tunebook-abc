@@ -157,7 +157,7 @@ dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc 
 # Assorted files
 
 abc_targets := $(patsubst abc/%,dist/abc/%,$(abc_source))
-
+abc: $(abc_targets)
 $(abc_targets) : dist/abc/%.abc : abc/%.abc
 	mkdir -p dist/abc
 	( 	\
@@ -166,28 +166,25 @@ $(abc_targets) : dist/abc/%.abc : abc/%.abc
 	) > $@
 
 midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
-
+midi: $(midi_targets)
 $(midi_targets) : dist/midi/%.midi : abc/%.abc
 	mkdir -p dist/midi
 	abc2midi "$<" -o "$@"
 
 mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
+mp3: $(mp3_targets)
 tmp_file := $(shell mktemp)
-
 $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	mkdir -p dist/mp3
-	echo "foo"
-	echo "$(tmp_file)"
 	fluidsynth -F "$(tmp_file)" -T wav GeneralUser_GS_v1.471.sf2 "$<"
-	lame "$(tmp_file)" "$@"
+	lame $(shell bin/get_tags.py $@) --tl "Tunebook ABC" --ta "Tunebook ABC" --tg Folk "$(tmp_file)" "$@"
 	rm "$(tmp_file)"
 
 # Copy the generated files to a web site
+target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: default $(abc_targets) $(midi_targets) $(mp3_targets)
-	scp -r $(targets) index.html .htaccess jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
-	(cd dist; \
-		rsync -av abc/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/abc; \
-		rsync -av midi/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/midi; \
-		rsync -av mp3/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/mp3; \
+website: $(targets) abc midi mp3
+	( \
+		cd dist; \
+		rsync -av $(target_filenames) abc/ midi/ mp3/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/abc; \
 	)
