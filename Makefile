@@ -231,8 +231,8 @@ $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 # Copy the generated files to a web site
 target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: $(targets) abc midi mp3
+website: $(targets) index.html .htaccess abc midi mp3
 	( \
 		cd dist; \
-		rsync -av $(target_filenames) abc/ midi/ mp3/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/abc; \
+		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/; \
 	)
