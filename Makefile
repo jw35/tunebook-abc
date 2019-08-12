@@ -45,7 +45,7 @@ dist/tunebook.pdf : $(abc_source) header.abc copying.abc bin/sorter.py tunebook.
 	) | abcm2ps - -i -F tunebook.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Bb
 dist/tunebook-bflat.pdf : $(abc_source) header.abc copying.abc bflat.abc bin/sorter.py tunebook.fmt bflat.abc
@@ -60,7 +60,7 @@ dist/tunebook-bflat.pdf : $(abc_source) header.abc copying.abc bflat.abc bin/sor
 	) | abcm2ps - -i -F tunebook.fmt -F bflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC in Bb' $@
+	exiftool -Title='Tunebook ABC in Bb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Eb
 dist/tunebook-eflat.pdf : $(abc_source) header.abc copying.abc eflat.abc bin/sorter.py tunebook.fmt eflat.abc
@@ -75,7 +75,7 @@ dist/tunebook-eflat.pdf : $(abc_source) header.abc copying.abc eflat.abc bin/sor
 	) | abcm2ps - -i -F tunebook.fmt -F eflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC in Eb' $@
+	exiftool -Title='Tunebook ABC in Eb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in the base clef
 dist/tunebook-base.pdf : $(abc_source) header.abc copying.abc base.abc bin/sorter.py tunebook.fmt base.abc
@@ -90,7 +90,7 @@ dist/tunebook-base.pdf : $(abc_source) header.abc copying.abc base.abc bin/sorte
 	) | abcm2ps - -i -F tunebook.fmt -F base.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC in the base clef' $@
+	exiftool -Title='Tunebook ABC in the base clef' -Author='Tunebook ABC' $@
 
 ## Tablatures and chords
 
@@ -106,7 +106,7 @@ dist/tunebook-tabs.pdf : $(abc_source) header.abc tabs.abc copying.abc bin/sorte
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - D Wistle' $@
+	exiftool -Title='Tunebook ABC - D Wistle' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
 dist/tunebook-mandolin.pdf : $(abc_source) header.abc mandolin.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
@@ -119,7 +119,7 @@ dist/tunebook-mandolin.pdf : $(abc_source) header.abc mandolin.abc copying.abc b
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Mandolin' $@
+	exiftool -Title='Tunebook ABC - Mandolin' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with dulcimer
 # chord diagrams and dulcimer tabs
@@ -133,7 +133,7 @@ dist/tunebook-dulcimer.pdf : $(abc_source) header.abc dulcimer.abc copying.abc b
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Dulcimer' $@
+	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
 dist/tunebook-ukulele.pdf : $(abc_source) header.abc ukulele.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
@@ -146,7 +146,7 @@ dist/tunebook-ukulele.pdf : $(abc_source) header.abc ukulele.abc copying.abc bin
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Dulcimer' $@
+	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
 
 ## Cheatsheets
 
@@ -161,7 +161,7 @@ dist/cheatsheet.pdf : $(abc_source) header.abc cheatsheet.abc copying.abc bin/so
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -F  cheatsheet.fmt -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with whistle fingering
 dist/cheatsheet-whistle.pdf : $(abc_source) header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
@@ -174,7 +174,7 @@ dist/cheatsheet-whistle.pdf : $(abc_source) header.abc cheatsheet-whistle.abc co
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with mandolin fingering
 dist/cheatsheet-mandolin.pdf : $(abc_source) header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
@@ -187,7 +187,7 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) header.abc cheatsheet-mandolin.abc 
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with dulcimer fingering
 dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
@@ -200,7 +200,7 @@ dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc 
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' -Author='Tunebook ABC' $@
 
 # Assorted files
 
