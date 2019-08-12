@@ -10,9 +10,6 @@ dist/cheatsheet-mandolin.pdf \
 dist/cheatsheet-dulcimer.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
-abc_targets := $(patsubst abc/%,dist/abc/%,$(abc_source))
-midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
-mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
 
 .PHONY: default
 default: $(targets)
@@ -157,34 +154,37 @@ dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc 
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' $@
 
+# Assorted files
 
-dist/.abcfiles: $(abc_source) header.abc copying.abc
+abc_targets := $(patsubst abc/%,dist/abc/%,$(abc_source))
+
+$(abc_targets) : dist/abc/%.abc : abc/%.abc
 	mkdir -p dist/abc
-	(cd abc; \
-	 for f in `ls [0-9]*.abc`; do ( \
-	 	echo '%abc-2.1'; \
-	 	cat "$${f}"; \
-	 	) > ../dist/abc/$${f}; done; \
-	)
-	touch dist/.abcfiles
+	( 	\
+		echo '%abc-2.1'; \
+		cat "$<"; \
+	) > $@
 
-dist/.midifiles: $(abc_source)
+midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
+
+$(midi_targets) : dist/midi/%.midi : abc/%.abc
 	mkdir -p dist/midi
-	(cd abc; \
-	 for f in `ls [0-9]*.abc`; do abc2midi "$${f}" -o ../dist/midi/$$(basename "$${f}" .abc).midi; done; \
-	)
-	touch dist/.midifiles
+	abc2midi "$<" -o "$@"
 
-dist/.mp3files: dist/.midifiles
+mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
+tmp_file := $(shell mktemp)
+
+$(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	mkdir -p dist/mp3
-	(cd dist/midi; \
-	 for f in `ls [0-9]*.midi`; do fluidsynth -F tmp.wav ../../GeneralUser_GS_v1.471.sf2 "$${f}"; lame tmp.wav ../../dist/mp3/$$(basename "$${f}" .midi).mp3; rm tmp.wav; done; \
-	)
-	touch dist/.mp3files
+	echo "foo"
+	echo "$(tmp_file)"
+	fluidsynth -F "$(tmp_file)" -T wav GeneralUser_GS_v1.471.sf2 "$<"
+	lame "$(tmp_file)" "$@"
+	rm "$(tmp_file)"
 
 # Copy the generated files to a web site
 .PHONY: website
-website: default dist/.abcfiles dist/.midifiles dist/.mp3files
+website: default $(abc_targets) $(midi_targets) $(mp3_targets)
 	scp -r $(targets) index.html .htaccess jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc
 	(cd dist; \
 		rsync -av abc/ jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/abc; \
