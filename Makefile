@@ -202,7 +202,7 @@ $(abc_targets) : dist/abc/%.abc : abc/%.abc
 		cat "$<"; \
 	) > $@
 
-dist/tunebook-abc.zip: dist/abc/*.abc
+dist/tunebook-abc.zip: $(abc_targets)
 	( cd dist/abc; zip ../tunebook-abc.zip *.abc )
 
 midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
@@ -211,7 +211,7 @@ $(midi_targets) : dist/midi/%.midi : abc/%.abc
 	mkdir -p dist/midi
 	abc2midi "$<" -o "$@"
 
-dist/tunebook-midi.zip: dist/midi/*.midi
+dist/tunebook-midi.zip: $(midi_targets)
 	( cd dist/midi; zip ../tunebook-midi.zip *.midi )
 
 mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
@@ -223,7 +223,7 @@ $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	lame $(shell bin/get_tags.py $@) --tl "Tunebook ABC" --ta "Tunebook ABC" --tg Folk "$(tmp_file)" "$@"
 	rm "$(tmp_file)"
 
-dist/tunebook-mp3.zip: dist/mp3/*.mp3
+dist/tunebook-mp3.zip: $(mp3_targets)
 	( cd dist/mp3; zip ../tunebook-mp3.zip *.mp3 )
 
 
