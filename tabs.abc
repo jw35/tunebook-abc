@@ -1,5 +1,11 @@
+%%vskip 1.5cm
+%%textfont * 36
+%%center Tunebook ABC - Guitar and Whistle
+%%vskip 27
+
+%%textfont * 18
 %%vskip 5
 %%begintext justify
-%%This rendering of the tunebook includes guitar chord diagrams and
+%%This rendering of the tunebook includes Guitar chord diagrams and
 %%whistle fingerings for D whistles.
 %%endtext

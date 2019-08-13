@@ -1,3 +1,9 @@
+%%vskip 1.5cm
+%%textfont * 36
+%%center Tunebook ABC - E\u266d Edition
+%%vskip 27
+
+%%textfont * 18
 %%vskip 5
 %%begintext justify
 %%This rendering of the tunebook contains all the tunes using much the

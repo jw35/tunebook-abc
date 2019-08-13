@@ -2,7 +2,7 @@ targets = dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-bflat.pdf \
 dist/tunebook-eflat.pdf \
-dist/tunebook-base.pdf \
+dist/tunebook-baseclef.pdf \
 dist/tunebook-tabs.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer.pdf \
@@ -24,21 +24,21 @@ fixup:
 	dos2unix $(abc_source)
 
 # Create a concatenation for distribution
-dist/tunebook.abc: $(abc_source) header.abc copying.abc bin/sorter.py
+dist/tunebook.abc: $(abc_source) tunebook.abc frontmatter.abc bin/sorter.py
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-     cat header.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+     cat tunebook.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "% Version $$(git describe --tags --always)"; echo; \
      bin/sorter.py --ref; \
 	) > $@
 
 # All the tunes as a printable score matching the published Tunebook
-dist/tunebook.pdf : $(abc_source) header.abc copying.abc bin/sorter.py tunebook.fmt
+dist/tunebook.pdf : $(abc_source) tunebook.abc frontmatter.abc bin/sorter.py tunebook.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat tunebook.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
@@ -48,12 +48,11 @@ dist/tunebook.pdf : $(abc_source) header.abc copying.abc bin/sorter.py tunebook.
 	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Bb
-dist/tunebook-bflat.pdf : $(abc_source) header.abc copying.abc bflat.abc bin/sorter.py tunebook.fmt bflat.abc
+dist/tunebook-bflat.pdf : $(abc_source) bflat.abc frontmatter.abc bin/sorter.py tunebook.fmt bflat.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat bflat.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
@@ -63,12 +62,11 @@ dist/tunebook-bflat.pdf : $(abc_source) header.abc copying.abc bflat.abc bin/sor
 	exiftool -Title='Tunebook ABC in Bb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Eb
-dist/tunebook-eflat.pdf : $(abc_source) header.abc copying.abc eflat.abc bin/sorter.py tunebook.fmt eflat.abc
+dist/tunebook-eflat.pdf : $(abc_source) eflat.abc frontmatter.abc bin/sorter.py tunebook.fmt eflat.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat eflat.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
@@ -78,16 +76,15 @@ dist/tunebook-eflat.pdf : $(abc_source) header.abc copying.abc eflat.abc bin/sor
 	exiftool -Title='Tunebook ABC in Eb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in the base clef
-dist/tunebook-base.pdf : $(abc_source) header.abc copying.abc base.abc bin/sorter.py tunebook.fmt base.abc
+dist/tunebook-baseclef.pdf : $(abc_source) baseclef.abc frontmatter.abc bin/sorter.py tunebook.fmt baseclef.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
-	 cat base.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat baseclef.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -F base.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | abcm2ps - -i -F tunebook.fmt -F baseclef.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in the base clef' -Author='Tunebook ABC' $@
@@ -96,12 +93,11 @@ dist/tunebook-base.pdf : $(abc_source) header.abc copying.abc base.abc bin/sorte
 
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and D whistle tabs
-dist/tunebook-tabs.pdf : $(abc_source) header.abc tabs.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
+dist/tunebook-tabs.pdf : $(abc_source) tabs.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat tabs.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
@@ -109,12 +105,11 @@ dist/tunebook-tabs.pdf : $(abc_source) header.abc tabs.abc copying.abc bin/sorte
 	exiftool -Title='Tunebook ABC - D Wistle' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
-dist/tunebook-mandolin.pdf : $(abc_source) header.abc mandolin.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
+dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat mandolin.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
@@ -123,12 +118,11 @@ dist/tunebook-mandolin.pdf : $(abc_source) header.abc mandolin.abc copying.abc b
 
 # All the tunes as a printable score, one tune per page with dulcimer
 # chord diagrams and dulcimer tabs
-dist/tunebook-dulcimer.pdf : $(abc_source) header.abc dulcimer.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+dist/tunebook-dulcimer.pdf : $(abc_source) dulcimer.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat dulcimer.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
@@ -136,12 +130,11 @@ dist/tunebook-dulcimer.pdf : $(abc_source) header.abc dulcimer.abc copying.abc b
 	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
-dist/tunebook-ukulele.pdf : $(abc_source) header.abc ukulele.abc copying.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
+dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat ukulele.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
@@ -151,12 +144,11 @@ dist/tunebook-ukulele.pdf : $(abc_source) header.abc ukulele.abc copying.abc bin
 ## Cheatsheets
 
 # The first few bars of all the tunes
-dist/cheatsheet.pdf : $(abc_source) header.abc cheatsheet.abc copying.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
+dist/cheatsheet.pdf : $(abc_source) cheatsheet.abc frontmatter.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat cheatsheet.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
@@ -164,12 +156,11 @@ dist/cheatsheet.pdf : $(abc_source) header.abc cheatsheet.abc copying.abc bin/so
 	exiftool -Title='Tunebook ABC - Cheatsheet' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with whistle fingering
-dist/cheatsheet-whistle.pdf : $(abc_source) header.abc cheatsheet-whistle.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
+dist/cheatsheet-whistle.pdf : $(abc_source) cheatsheet-whistle.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat cheatsheet-whistle.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
@@ -177,12 +168,11 @@ dist/cheatsheet-whistle.pdf : $(abc_source) header.abc cheatsheet-whistle.abc co
 	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with mandolin fingering
-dist/cheatsheet-mandolin.pdf : $(abc_source) header.abc cheatsheet-mandolin.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
+dist/cheatsheet-mandolin.pdf : $(abc_source) cheatsheet-mandolin.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat cheatsheet-mandolin.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
@@ -190,12 +180,11 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) header.abc cheatsheet-mandolin.abc 
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with dulcimer fingering
-dist/cheatsheet-dulcimer.pdf : $(abc_source) header.abc cheatsheet-dulcimer.abc copying.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+dist/cheatsheet-dulcimer.pdf : $(abc_source) cheatsheet-dulcimer.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat header.abc; echo; echo; \
 	 cat cheatsheet-dulcimer.abc; echo; echo; \
-	 cat copying.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
