@@ -202,11 +202,17 @@ $(abc_targets) : dist/abc/%.abc : abc/%.abc
 		cat "$<"; \
 	) > $@
 
+dist/tunebook-abc.zip: dist/abc/*.abc
+	( cd dist/abc; zip ../tunebook-abc.zip *.abc )
+
 midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
 midi: $(midi_targets)
 $(midi_targets) : dist/midi/%.midi : abc/%.abc
 	mkdir -p dist/midi
 	abc2midi "$<" -o "$@"
+
+dist/tunebook-midi.zip: dist/midi/*.midi
+	( cd dist/midi; zip ../tunebook-midi.zip *.midi )
 
 mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
 mp3: $(mp3_targets)
@@ -217,11 +223,15 @@ $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	lame $(shell bin/get_tags.py $@) --tl "Tunebook ABC" --ta "Tunebook ABC" --tg Folk "$(tmp_file)" "$@"
 	rm "$(tmp_file)"
 
+dist/tunebook-mp3.zip: dist/mp3/*.mp3
+	( cd dist/mp3; zip ../tunebook-mp3.zip *.mp3 )
+
+
 # Copy the generated files to a web site
 target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: $(targets) index.html .htaccess abc midi mp3
+website: $(targets) index.html .htaccess abc midi mp3 dist/tunebook-abc.zip dist/tunebook-midi.zip dist/tunebook-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/; \
+		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 tunebook-abc.zip tunebook-midi.zip tunebook-mp3.zip jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/; \
 	)
