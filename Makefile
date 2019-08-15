@@ -56,7 +56,7 @@ dist/tunebook-bflat.pdf : $(abc_source) bflat.abc frontmatter.abc bin/sorter.py 
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -F bflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F bflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in Bb' -Author='Tunebook ABC' $@
@@ -70,7 +70,7 @@ dist/tunebook-eflat.pdf : $(abc_source) eflat.abc frontmatter.abc bin/sorter.py 
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -F eflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F eflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in Eb' -Author='Tunebook ABC' $@
@@ -84,7 +84,7 @@ dist/tunebook-baseclef.pdf : $(abc_source) baseclef.abc frontmatter.abc bin/sort
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -F baseclef.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F baseclef.fmt -O - | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in the base clef' -Author='Tunebook ABC' $@
