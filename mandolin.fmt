@@ -23,8 +23,13 @@ beginps
 
 /m_lines {
     10 10 40 {
-        dup 10 exch M m_width exch lineto
+        dup 15 exch M m_width exch lineto
     } for stroke
+    /Helvetica-Bold 9 selectfont
+    13 7 M 90 rotate (G) show -90 rotate
+    13 17 M 90 rotate (D) show -90 rotate
+    13 27 M 90 rotate (A) show -90 rotate
+    13 37 M 90 rotate (E) show -90 rotate
 } !
 
 % show a string horizontally and vertically centred at current location

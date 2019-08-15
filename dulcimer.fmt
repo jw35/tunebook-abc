@@ -22,10 +22,14 @@ beginps
 } !
 
 /d_lines {
-    10  9 M d_width  9 L stroke
-    10 11 M d_width 11 L stroke
-    10 20 M d_width 20   L stroke
-    10 30 M d_width 30   L stroke
+    15  9 M d_width  9 L stroke
+    15 11 M d_width 11 L stroke
+    15 20 M d_width 20   L stroke
+    15 30 M d_width 30   L stroke
+    /Helvetica-Bold 9 selectfont
+    13 7 M 90 rotate (D) show -90 rotate
+    13 17 M 90 rotate (A) show -90 rotate
+    13 27 M 90 rotate (D) show -90 rotate
 } !
 
 % show a string horizontally and vertically centred at current location
