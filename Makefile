@@ -6,6 +6,7 @@ dist/tunebook-baseclef.pdf \
 dist/tunebook-tabs.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer.pdf \
+dist/tunebook-dulcimer-tabs-dad.pdf \
 dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-whistle.pdf \
@@ -117,15 +118,28 @@ dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sort
 	exiftool -Title='Tunebook ABC - Mandolin' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with dulcimer
-# chord diagrams and dulcimer tabs
-dist/tunebook-dulcimer.pdf : $(abc_source) dulcimer.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+# chord diagrams for a DAD-tuned instrument
+dist/tunebook-dulcimer.pdf : $(abc_source) dulcimer-chords-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat dulcimer.abc; echo; echo; \
+	 cat dulcimer-chords-dad.abc; echo; echo; \
 	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -O - | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - DAD Dulcimer Chords' -Author='Tunebook ABC' $@
+
+# Just the tunes in 'D' as a printable score, one tune per page with dulcimer
+# chord diagrams and dulcimer tabs for a DAD-tuned instrument
+dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) dulcimer-tabs-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat dulcimer-tabs-dad.abc; echo; echo; \
+	 cat frontmatter.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --key-filter D; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
 
@@ -179,15 +193,16 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) cheatsheet-mandolin.abc frontmatter
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
-# The first few bars of all the tunes with dulcimer fingering
-dist/cheatsheet-dulcimer.pdf : $(abc_source) cheatsheet-dulcimer.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+# The first few bars of all the tunes in 'D' with dulcimer fingering for a
+# DAD-tuned instrument
+dist/cheatsheet-dulcimer.pdf : $(abc_source) cheatsheet-dulcimer-dad.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet-dulcimer.abc; echo; echo; \
+	 cat cheatsheet-dulcimer-dad.abc; echo; echo; \
 	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
-	 bin/sorter.py --title; \
+	 bin/sorter.py --title --key-filter D; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' -Author='Tunebook ABC' $@
 
