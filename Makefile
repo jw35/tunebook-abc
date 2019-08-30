@@ -3,15 +3,15 @@ dist/tunebook.pdf \
 dist/tunebook-bflat.pdf \
 dist/tunebook-eflat.pdf \
 dist/tunebook-baseclef.pdf \
-dist/tunebook-tabs.pdf \
+dist/tunebook-guitar-dwhistle.pdf \
 dist/tunebook-mandolin.pdf \
-dist/tunebook-dulcimer.pdf \
+dist/tunebook-dulcimer-chords-dad.pdf \
 dist/tunebook-dulcimer-tabs-dad.pdf \
 dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
-dist/cheatsheet-whistle.pdf \
+dist/cheatsheet-dwhistle.pdf \
 dist/cheatsheet-mandolin.pdf \
-dist/cheatsheet-dulcimer.pdf
+dist/cheatsheet-dulcimer-dad.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
 
@@ -94,16 +94,16 @@ dist/tunebook-baseclef.pdf : $(abc_source) baseclef.abc frontmatter.abc bin/sort
 
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and D whistle tabs
-dist/tunebook-tabs.pdf : $(abc_source) tabs.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
+dist/tunebook-guitar-dwhistle.pdf : $(abc_source) guitar-dwhistle.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat tabs.abc; echo; echo; \
+	 cat guitar-dwhistle.abc; echo; echo; \
 	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - D Wistle' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - Guitar and D Wistle' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
 dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
@@ -119,7 +119,7 @@ dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sort
 
 # All the tunes as a printable score, one tune per page with dulcimer
 # chord diagrams for a DAD-tuned instrument
-dist/tunebook-dulcimer.pdf : $(abc_source) dulcimer-chords-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+dist/tunebook-dulcimer-chords-dad.pdf : $(abc_source) dulcimer-chords-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat dulcimer-chords-dad.abc; echo; echo; \
@@ -141,7 +141,7 @@ dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) dulcimer-tabs-dad.abc frontm
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --key-filter D; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
 dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
@@ -153,7 +153,7 @@ dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
 	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Dulcimer' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - Ukulele' -Author='Tunebook ABC' $@
 
 ## Cheatsheets
 
@@ -170,16 +170,16 @@ dist/cheatsheet.pdf : $(abc_source) cheatsheet.abc frontmatter.abc bin/sorter.py
 	exiftool -Title='Tunebook ABC - Cheatsheet' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with whistle fingering
-dist/cheatsheet-whistle.pdf : $(abc_source) cheatsheet-whistle.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
+dist/cheatsheet-dwhistle.pdf : $(abc_source) cheatsheet-dwhistle.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet-whistle.abc; echo; echo; \
+	 cat cheatsheet-dwhistle.abc; echo; echo; \
 	 cat frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
 	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet Whistle' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet D Whistle' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with mandolin fingering
 dist/cheatsheet-mandolin.pdf : $(abc_source) cheatsheet-mandolin.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
@@ -195,7 +195,7 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) cheatsheet-mandolin.abc frontmatter
 
 # The first few bars of all the tunes in 'D' with dulcimer fingering for a
 # DAD-tuned instrument
-dist/cheatsheet-dulcimer.pdf : $(abc_source) cheatsheet-dulcimer-dad.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+dist/cheatsheet-dulcimer-dad.pdf : $(abc_source) cheatsheet-dulcimer-dad.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
 	 cat cheatsheet-dulcimer-dad.abc; echo; echo; \
@@ -204,7 +204,7 @@ dist/cheatsheet-dulcimer.pdf : $(abc_source) cheatsheet-dulcimer-dad.abc frontma
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title --key-filter D; \
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
-	exiftool -Title='Tunebook ABC - Cheatsheet Dulcimer' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # Assorted files
 
@@ -248,5 +248,5 @@ target_filenames := $(patsubst dist/%,%,$(targets))
 website: $(targets) index.html .htaccess abc midi mp3 dist/tunebook-abc.zip dist/tunebook-midi.zip dist/tunebook-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 tunebook-abc.zip tunebook-midi.zip tunebook-mp3.zip jonw@sphinx.mythic-beasts.com:www.brsn.org.uk_html/tunebook-abc/; \
+		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 tunebook-abc.zip tunebook-midi.zip tunebook-mp3.zip jonw@sphinx.mythic-beasts.com:brsn.org.uk_html/tunebook-abc/; \
 	)
