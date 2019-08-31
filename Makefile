@@ -102,7 +102,9 @@ dist/tunebook-guitar-dwhistle.pdf : $(abc_source) guitar-dwhistle.abc frontmatte
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC - Guitar and D Wistle' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
@@ -114,7 +116,9 @@ dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sort
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | ps2pdf - $@
+	) | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC - Mandolin' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with dulcimer
@@ -127,7 +131,9 @@ dist/tunebook-dulcimer-chords-dad.pdf : $(abc_source) dulcimer-chords-dad.abc fr
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC - DAD Dulcimer Chords' -Author='Tunebook ABC' $@
 
 # Just the tunes in 'D' as a printable score, one tune per page with dulcimer
@@ -140,7 +146,9 @@ dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) dulcimer-tabs-dad.abc frontm
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --key-filter D; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC - DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
@@ -152,7 +160,9 @@ dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | ps2pdf - $@
+	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
 	exiftool -Title='Tunebook ABC - Ukulele' -Author='Tunebook ABC' $@
 
 ## Cheatsheets
