@@ -1,3 +1,4 @@
+format mandolin.fmt
 % Reset mandolin tablature line width to suite the cheetsheet format
 beginps
 /m_width 401.6 def
