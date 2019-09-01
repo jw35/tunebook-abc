@@ -14,10 +14,9 @@ beginps
 /d_width 689.6 def
 
 /d_head {                                        % pitch d_head
-    pop
     /Helvetica 8 selectfont
     0 0 M 90 rotate (DULCIMER) show -90 rotate
-    d_lines
+    d_lines                                      % pitch
     newpath
 } !
 
@@ -26,10 +25,10 @@ beginps
     15 11 M d_width 11 L stroke
     15 20 M d_width 20   L stroke
     15 30 M d_width 30   L stroke
-    /Helvetica-Bold 9 selectfont
-    13 7 M 90 rotate (D) show -90 rotate
-    13 17 M 90 rotate (A) show -90 rotate
-    13 27 M 90 rotate (D) show -90 rotate
+    /Helvetica-Bold 9 selectfont                % pitch
+    13 7 M 90 rotate show -90 rotate
+    13 17 M 90 rotate (?) show -90 rotate
+    13 27 M 90 rotate (?) show -90 rotate
 } !
 
 % show a string horizontally and vertically centred at current location
