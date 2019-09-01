@@ -15,6 +15,9 @@ dist/cheatsheet-dulcimer-dad.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
 
+common_depends = inc/frontmatter.abc bin/sorter.py fmt/tunebook.fmt
+common_args = - -i -D fmt -F tunebook.fmt -O -
+
 .PHONY: default
 default: $(targets)
 
@@ -25,67 +28,67 @@ fixup:
 	dos2unix $(abc_source)
 
 # Create a concatenation for distribution
-dist/tunebook.abc: $(abc_source) tunebook.abc frontmatter.abc bin/sorter.py
+dist/tunebook.abc: $(abc_source) inc/tunebook.abc inc/frontmatter.abc bin/sorter.py
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-     cat tunebook.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+     cat inc/tunebook.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "% Version $$(git describe --tags --always)"; echo; \
      bin/sorter.py --ref; \
 	) > $@
 
 # All the tunes as a printable score matching the published Tunebook
-dist/tunebook.pdf : $(abc_source) tunebook.abc frontmatter.abc bin/sorter.py tunebook.fmt
+dist/tunebook.pdf : $(abc_source) $(common_depends) inc/tunebook.abc
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat tunebook.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/tunebook.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | abcm2ps - -i -F tunebook.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | abcm2ps $(common_args) | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Bb
-dist/tunebook-bflat.pdf : $(abc_source) bflat.abc frontmatter.abc bin/sorter.py tunebook.fmt bflat.fmt
+dist/tunebook-bflat.pdf : $(abc_source) $(common_depends) inc/bflat.abc fmt/bflat.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat bflat.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/bflat.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F bflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps $(common_args) -F bflat.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in Bb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Eb
-dist/tunebook-eflat.pdf : $(abc_source) eflat.abc frontmatter.abc bin/sorter.py tunebook.fmt eflat.fmt
+dist/tunebook-eflat.pdf : $(abc_source) $(common_depends) inc/eflat.abc fmt/eflat.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat eflat.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/eflat.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F eflat.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps $(common_args) -F eflat.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in Eb' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in the base clef
-dist/tunebook-baseclef.pdf : $(abc_source) baseclef.abc frontmatter.abc bin/sorter.py tunebook.fmt baseclef.fmt
+dist/tunebook-baseclef.pdf : $(abc_source) $(common_depends) inc/baseclef.abc fmt/baseclef.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat baseclef.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/baseclef.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | bin/strip_chords.py | abcm2ps - -i -F tunebook.fmt -F baseclef.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps $(common_args) -F baseclef.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in the base clef' -Author='Tunebook ABC' $@
@@ -94,73 +97,73 @@ dist/tunebook-baseclef.pdf : $(abc_source) baseclef.abc frontmatter.abc bin/sort
 
 # All the tunes as a printable score, one tune per page with guitar
 # chord diagrams and D whistle tabs
-dist/tunebook-guitar-dwhistle.pdf : $(abc_source) guitar-dwhistle.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt flute.fmt guitarchords.fmt
+dist/tunebook-guitar-dwhistle.pdf : $(abc_source) $(common_depends) inc/guitar-dwhistle.abc bin/add_chords.py fmt/flute.fmt fmt/guitarchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat guitar-dwhistle.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/guitar-dwhistle.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F guitarchords.fmt -T1 -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/add_chords.py | abcm2ps $(common_args) -1 -T1 -F guitarchords.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC - Guitar and D Wistle' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - Guitar and D Whistle' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with mandolin tabs
-dist/tunebook-mandolin.pdf : $(abc_source) mandolin.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt mandolin.fmt
+dist/tunebook-mandolin.pdf : $(abc_source) $(common_depends) inc/mandolin.abc fmt/mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat mandolin.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/mandolin.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | abcm2ps - -1 -i -F tunebook.fmt -T7 -O - | bin/abcmaddidx.tcl - $@.ps
+	) | abcm2ps $(common_args) -1 -T7 | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - Mandolin' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with dulcimer
 # chord diagrams for a DAD-tuned instrument
-dist/tunebook-dulcimer-chords-dad.pdf : $(abc_source) dulcimer-chords-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+dist/tunebook-dulcimer-chords-dad.pdf : $(abc_source) $(common_depends) inc/dulcimer-chords-dad.abc bin/add_chords.py fmt/dulcimer.fmt fmt/dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat dulcimer-chords-dad.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/dulcimer-chords-dad.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/add_chords.py | abcm2ps $(common_args) -1 -F dulcimerchords.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - DAD Dulcimer Chords' -Author='Tunebook ABC' $@
 
 # Just the tunes in 'D' as a printable score, one tune per page with dulcimer
 # chord diagrams and dulcimer tabs for a DAD-tuned instrument
-dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) dulcimer-tabs-dad.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt dulcimer.fmt dulcimerchords.fmt
+dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) $(common_depends) inc/dulcimer-tabs-dad.abc bin/add_chords.py fmt/dulcimer.fmt fmt/dulcimerchords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat dulcimer-tabs-dad.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/dulcimer-tabs-dad.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --key-filter D; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F dulcimerchords.fmt -T8 -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/add_chords.py | abcm2ps $(common_args) -1 -T8 -F dulcimerchords.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score, one tune per page with ukulele chords
-dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter.py bin/add_chords.py tunebook.fmt ukulelechords.fmt
+dist/tunebook-ukulele.pdf : $(abc_source) $(common_depends) inc/ukulele.abc bin/add_chords.py fmt/ukulelechords.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat ukulele.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/ukulele.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref; \
-	) | bin/add_chords.py | abcm2ps - -1 -i -F tunebook.fmt -F ukulelechords.fmt -O - | bin/abcmaddidx.tcl - $@.ps
+	) | bin/add_chords.py | abcm2ps $(common_args) -1 -F ukulelechords.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - Ukulele' -Author='Tunebook ABC' $@
@@ -168,52 +171,52 @@ dist/tunebook-ukulele.pdf : $(abc_source) ukulele.abc frontmatter.abc bin/sorter
 ## Cheatsheets
 
 # The first few bars of all the tunes
-dist/cheatsheet.pdf : $(abc_source) cheatsheet.abc frontmatter.abc bin/sorter.py  bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt
+dist/cheatsheet.pdf : $(abc_source) $(common_depends) inc/cheatsheet.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/cheatsheet.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) | bin/make_cheatsheet.py --rows 13 | abcm2ps - -i -F tunebook.fmt -F  cheatsheet.fmt -O - | ps2pdf - $@
+	) | bin/make_cheatsheet.py --rows 13 | abcm2ps $(common_args) -F  cheatsheet.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with whistle fingering
-dist/cheatsheet-dwhistle.pdf : $(abc_source) cheatsheet-dwhistle.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt flute.fmt
+dist/cheatsheet-dwhistle.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dwhistle.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/flute.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet-dwhistle.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/cheatsheet-dwhistle.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -T1 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps $(common_args) -F cheatsheet.fmt -T1 | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet D Whistle' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with mandolin fingering
-dist/cheatsheet-mandolin.pdf : $(abc_source) cheatsheet-mandolin.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-mandolin.fmt mandolin.fmt
+dist/cheatsheet-mandolin.pdf : $(abc_source) $(common_depends) inc/cheatsheet-mandolin.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/cheatsheet-mandolin.fmt fmt/mandolin.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet-mandolin.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/cheatsheet-mandolin.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-mandolin.fmt -T7 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T7 -F cheatsheet.fmt -F cheatsheet-mandolin.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes in 'D' with dulcimer fingering for a
 # DAD-tuned instrument
-dist/cheatsheet-dulcimer-dad.pdf : $(abc_source) cheatsheet-dulcimer-dad.abc frontmatter.abc bin/sorter.py bin/make_cheatsheet.py tunebook.fmt cheatsheet.fmt cheatsheet-dulcimer.fmt dulcimer.fmt
+dist/cheatsheet-dulcimer-dad.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dulcimer-dad.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/cheatsheet-dulcimer.fmt fmt/dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat cheatsheet-dulcimer-dad.abc; echo; echo; \
-	 cat frontmatter.abc; echo; echo; \
+	 cat inc/cheatsheet-dulcimer-dad.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title --key-filter D; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps - -i -F tunebook.fmt -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt -T8 -O - | ps2pdf - $@
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # Assorted files
