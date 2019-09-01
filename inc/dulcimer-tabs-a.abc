@@ -1,0 +1,18 @@
+%%vskip 1.5cm
+%%textfont * 36
+%%center Tunebook ABC - Dulcimer melody TABs for 'A'
+%%vskip 27
+
+%%textfont * 18
+%%vskip 5
+%%begintext justify
+%%This rendering of the tunebook includes simple tabs for Mountain Dulcimers that have their
+%%melody string(s) tuned to 'A' (D-A-A, etc.). These melodies will only
+%%work if the drone strings are tuned appropriately for the corresponding tune's key.
+%%endtext
+
+%%vskip 5
+%%begintext justify
+%%Instruments without an '8\u00bd' fret are going to struggle to play anything in
+%%the key of 'G' because they won't be able to play 'C\u266e'.
+%%endtext

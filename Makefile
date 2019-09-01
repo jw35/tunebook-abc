@@ -6,7 +6,8 @@ dist/tunebook-baseclef.pdf \
 dist/tunebook-guitar-dwhistle.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer-chords-dad.pdf \
-dist/tunebook-dulcimer-tabs-dad.pdf \
+dist/tunebook-dulcimer-tabs-d.pdf \
+dist/tunebook-dulcimer-tabs-a.pdf \
 dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-dwhistle.pdf \
