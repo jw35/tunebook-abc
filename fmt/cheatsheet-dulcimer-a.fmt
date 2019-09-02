@@ -1,0 +1,6 @@
+format dulcimer.fmt
+tablature #8 pitch=A, 28 0 55 d_head d_note
+% Reset dulcimer tablature line width to suite the cheetsheet format
+beginps
+/d_width 401.6 def
+endps

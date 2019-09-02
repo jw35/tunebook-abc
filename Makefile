@@ -12,7 +12,8 @@ dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
 dist/cheatsheet-dwhistle.pdf \
 dist/cheatsheet-mandolin.pdf \
-dist/cheatsheet-dulcimer-dad.pdf
+dist/cheatsheet-dulcimer-d.pdf \
+dist/cheatsheet-dulcimer-a.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
 
@@ -220,17 +221,30 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) $(common_depends) inc/cheatsheet-ma
 	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T7 -F cheatsheet.fmt -F cheatsheet-mandolin.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
-# The first few bars of all the tunes in 'D' with dulcimer fingering for a
-# DAD-tuned instrument
-dist/cheatsheet-dulcimer-dad.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dulcimer-dad.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/cheatsheet-dulcimer-dad.fmt fmt/dulcimer.fmt
+# The first few bars of all the tunes with dulcimer fingering for an
+# instrument with a 'D' melody string
+dist/cheatsheet-dulcimer-d.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dulcimer-d.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/cheatsheet-dulcimer-d.fmt fmt/dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat inc/cheatsheet-dulcimer-dad.abc; echo; echo; \
+	 cat inc/cheatsheet-dulcimer-d.abc; echo; echo; \
 	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
-	 bin/sorter.py --title --key-filter D; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-dad.fmt | ps2pdf - $@
+	 bin/sorter.py --title; \
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-d.fmt | ps2pdf - $@
+	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
+
+# The first few bars of all the tunes with dulcimer fingering for an
+# instrument with a 'A' melody string
+dist/cheatsheet-dulcimer-a.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dulcimer-a.abc bin/make_cheatsheet.py fmt/cheatsheet.fmt fmt/cheatsheet-dulcimer-a.fmt fmt/dulcimer.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat inc/cheatsheet-dulcimer-a.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
+	 echo '%%scale 0.6'; \
+	 bin/sorter.py --title; \
+	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-a.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # Assorted files
