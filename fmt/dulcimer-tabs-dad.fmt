@@ -1,2 +1,5 @@
 format dulcimer.fmt
+beginps
+/d_drones [(D) (A)] def
+endps
 tablature #8 pitch=D 28 0 55 d_head d_note

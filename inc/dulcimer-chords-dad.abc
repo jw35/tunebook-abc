@@ -1,12 +1,12 @@
 %%vskip 1.5cm
 %%textfont * 36
-%%center Tunebook ABC - DAD Mountain Dulcimer Chords
+%%center Tunebook ABC - DAD Dulcimer Chords
 %%vskip 27
 
 %%textfont * 18
 %%vskip 5
 %%begintext justify
 %%This rendering of the tunebook includes example chord diagrams
-%%for DAD-tuned Mountain Dulcimers. The chords assume an instrument
+%%for D-A-D-tuned Mountain Dulcimers. The chords assume an instrument
 %%without a "1\u00bd" fret (there are otherwise better fingerings for "C").
 %%endtext

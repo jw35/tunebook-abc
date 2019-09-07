@@ -6,7 +6,8 @@ dist/tunebook-baseclef.pdf \
 dist/tunebook-guitar-dwhistle.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer-chords-dad.pdf \
-dist/tunebook-dulcimer-tabs-d.pdf \
+dist/tunebook-dulcimer-tabs-dad.pdf \
+dist/tunebook-dulcimer-tabs-dgd.pdf \
 dist/tunebook-dulcimer-tabs-a.pdf \
 dist/tunebook-ukulele.pdf \
 dist/cheatsheet.pdf \
@@ -141,19 +142,33 @@ dist/tunebook-dulcimer-chords-dad.pdf : $(abc_source) $(common_depends) inc/dulc
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - DAD Dulcimer Chords' -Author='Tunebook ABC' $@
 
-# Dulcimer melody TABs for a 'D' melody string
-dist/tunebook-dulcimer-tabs-d.pdf : $(abc_source) $(common_depends) inc/dulcimer-tabs-d.abc fmt/dulcimer-tabs-d.fmt fmt/dulcimer.fmt
+# Dulcimer melody TABs for tunes in 'D' and DAD tuneing
+dist/tunebook-dulcimer-tabs-dad.pdf : $(abc_source) $(common_depends) inc/dulcimer-tabs-dad.abc fmt/dulcimer-tabs-dad.fmt fmt/dulcimer.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat inc/dulcimer-tabs-d.abc; echo; echo; \
+	 cat inc/dulcimer-tabs-dad.abc; echo; echo; \
 	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
-	 bin/sorter.py --ref; \
-	) | abcm2ps $(common_args) -1 -T8 -F dulcimer-tabs-d.fmt | bin/abcmaddidx.tcl - $@.ps
+	 bin/sorter.py --ref --key-filter=D; \
+	) | abcm2ps $(common_args) -1 -T8 -F dulcimer-tabs-dad.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC - Dulcimer melody D' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC - DAD Dulcimer' -Author='Tunebook ABC' $@
+
+# Dulcimer melody TABs for tunes in 'G' and DGD tuneing
+dist/tunebook-dulcimer-tabs-dgd.pdf : $(abc_source) $(common_depends) inc/dulcimer-tabs-dgd.abc fmt/dulcimer-tabs-dgd.fmt fmt/dulcimer.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat inc/dulcimer-tabs-dgd.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --key-filter=G; \
+	) | abcm2ps $(common_args) -1 -T8 -F dulcimer-tabs-dgd.fmt | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
+	exiftool -Title='Tunebook ABC - DGD Dulcimer' -Author='Tunebook ABC' $@
 
 # Dulcimer melody TABs for a 'A' melody string
 dist/tunebook-dulcimer-tabs-a.pdf : $(abc_source) $(common_depends) inc/dulcimer-tabs-a.abc fmt/dulcimer-tabs-a.fmt fmt/dulcimer.fmt
