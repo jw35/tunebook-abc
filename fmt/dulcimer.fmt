@@ -4,14 +4,12 @@
 %
 % This definition was created by Jon Warbrick <jon.warbrick@googlemail.com>
 %
-% Define a tablature using the routines with something like
-%      tablature #1 pitch=G, 28 0 55 d_head d_note
-%
 % (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
 
 beginps
 
 /d_width 689.6 def
+/d_drones [(?) (?)] def
 
 /d_head {                                        % pitch d_head
     /Helvetica 8 selectfont
@@ -27,8 +25,8 @@ beginps
     15 30 M d_width 30   L stroke
     /Helvetica-Bold 9 selectfont                % pitch
     13 7 M 90 rotate show -90 rotate
-    13 17 M 90 rotate (?) show -90 rotate
-    13 27 M 90 rotate (?) show -90 rotate
+    13 17 M 90 rotate d_drones 1 get show -90 rotate
+    13 27 M 90 rotate d_drones 0 get show -90 rotate
 } !
 
 % show a string horizontally and vertically centred at current location
