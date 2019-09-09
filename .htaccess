@@ -8,6 +8,8 @@ RewriteBase "/tunebook-abc/"
 RewriteRule "^tunebook-tabs\.pdf$"        "tunebook-guitar-dwhistle.pdf" [R=permanent,L]
 RewriteRule "^tunebook-dulcimer\.pdf$"    "tunebook-dulcimer-chords-dad.pdf" [R=permanent,L]
 RewriteRule "^tunebook-dulcimer-tabs-d\.pdf$"    "tunebook-dulcimer-tabs-dad.pdf" [R=permanent,L]
+RewriteRule "^tunebook-dulcimer-tabs-dad\.pdf$"    "tunebook-dulcimer-tabs-dxd.pdf" [R=permanent,L]
+RewriteRule "^tunebook-dulcimer-tabs-dgd\.pdf$"    "tunebook-dulcimer-tabs-dxd.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-dulcimer\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-dulcimer-dad\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-whistle\.pdf$"   "cheatsheet-dwhistle.pdf" [R=permanent,L]
