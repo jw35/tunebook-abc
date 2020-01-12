@@ -1,0 +1,4 @@
+% Formatting parameters (in addition to tunebook.fmt)
+% to transpose from D to C
+
+transpose DC

@@ -1,0 +1,106 @@
+% This definition of 1-row accordion tablature is derived from one provided
+% for the mandolin by Jon Freeman at http://www.jonbanjo.com/temp/fmt.zip
+% (see the discussion at https://thesession.org/discussions/40837).
+%
+% This version was created by Jon Warbrick <jon.warbrick@googlemail.com>
+%
+% Define a tablature using the routines with something like
+%      tablature #6 pitch=C 28 0 55 a_head a_note
+%
+% (FTI, various aliased operators (e.g. !, M, T) are provided by abcm2ps)
+
+beginps
+
+/a_head {                                        % pitch a_head
+    /Helvetica 8 selectfont
+    0 5 M 90 rotate (ACCORDION) show -90 rotate
+    /Helvetica-Bold 36 selectfont
+    0 15 M show
+    newpath
+} !
+
+% show a string horizontally and vertically centred at current location
+% (inspired by https://stackoverflow.com/questions/3618194/how-to-determine-string-height-in-postscript)
+
+/a_ccshow {                                      % str a_ccshow
+    dup                           % str str
+    stringwidth pop               % str width
+    2 div neg                     % str -halfwidth
+    a_charheight 2 div neg        % str -halfwidth -halfheight
+    rmoveto
+    show
+} !
+
+% true for push
+/a_buttons [
+  [(1) true]    % C
+  [(-) true]    % C#
+  [(1) false]   % D
+  [(-) true]    % D#
+  [(2) true]    % E
+  [(2) false]   % F
+  [(-) true]    % F#
+  [(3) true]    % G
+  [(-) true]    % G#
+  [(3) false]   % A
+  [(-) true]    % A#
+  [(4) false]   % B
+  [(4) true]    % c
+  [(-) true]    % c#
+  [(5) false]   % d
+  [(-) true]    % d#
+  [(5) true]    % e
+  [(6) false]   % f
+  [(-) true]    % f#
+  [(6) true]    % g
+  [(-) true]    % g#
+  [(7) false]   % a
+  [(-) true]    % a#
+  [(7) true]    % b
+] def
+
+/Helvetica 16 selectfont
+gsave
+0 0 M
+(1234567-) true charpath flattenpath
+pathbbox                                % llx lly urx ury
+3 -1 roll                               % llx urx ury lly
+sub                                     % llx urx height
+/a_charheight exch def                  % llx urx
+pop pop
+grestore
+
+/a_note{                                         % octave pitch x-offset d_note
+    gsave
+    25 T                                         % octave pitch
+    0 0 M
+    /Helvetica 16 selectfont
+    0.5 SLW
+    exch 0 eq {                                  % pitch
+        dup a_buttons length lt {                % pitch
+            a_buttons exch get                   % [<number>, <push?>]
+            dup 0 get                            % [<number>, <push?>] <number>
+            a_ccshow                             % [<number>, <push?>]
+            1 get                                % <push?>
+            {
+            }
+            {
+                newpath
+                0 0 10 0 360 arc stroke
+            } ifelse
+        }
+        {
+            (-) a_ccshow
+        } ifelse
+    }
+    {                                            % pitch
+        pop
+        (-) a_ccshow
+    } ifelse
+    grestore
+} !
+
+endps
+
+tablature #6 pitch=C 28 0 50 a_head a_note
+

@@ -189,6 +189,24 @@ dist/tunebook-ukulele.pdf : $(abc_source) $(common_depends) inc/ukulele.abc bin/
 	rm $@.ps
 	exiftool -Title='Tunebook ABC - Ukulele' -Author='Tunebook ABC' $@
 
+# All the tunes as a printable score, one tune per page with 'C' accordian fingering
+dist/tunebook-accordion.pdf : $(abc_source) $(common_depends) inc/accordion1.abc fmt/d-to-c.fmt fmt/g-to-c.fmt fmt/accordion1.fmt fmt/accordion1buttons.fmt
+	mkdir -p dist
+	(echo '%abc-2.1'; \
+	 cat inc/accordion1.abc; echo; echo; \
+	 cat inc/frontmatter.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 echo '%%format d-to-c.fmt'; \
+	 bin/sorter.py --ref --key-filter=D; \
+	 echo '%%newpage'; \
+	 echo '%%format g-to-c.fmt'; \
+	 bin/sorter.py --ref --key-filter=G; \
+	) | abcm2ps $(common_args) -1 -T6 -F accordion1.fmt | bin/abcmaddidx.tcl - $@.ps
+	ps2pdf $@.ps $@
+	rm $@.ps
+	exiftool -Title='Tunebook ABC - C Accordion' -Author='Tunebook ABC' $@
+
 ## Cheatsheets
 
 # The first few bars of all the tunes
