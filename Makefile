@@ -151,11 +151,11 @@ dist/tunebook-dulcimer-tabs-dxd.pdf : $(abc_source) $(common_depends) inc/dulcim
 	 echo '%%newpage'; \
 	 cat inc/dulcimer-tabs-dxd-1.abc; echo; echo; \
 	 echo '%%format dulcimer-tabs-dad.fmt'; \
-	 bin/sorter.py --ref --key-filter=D; \
+	 bin/sorter.py --ref --key-filter=D --key-filter=Bm --key-filter=AMix --key-filter=EDor; \
 	 echo '%%newpage'; \
 	 cat inc/dulcimer-tabs-dxd-2.abc; echo; echo; \
 	 echo '%%format dulcimer-tabs-dgd.fmt'; \
-	 bin/sorter.py --ref --key-filter=G; \
+	 bin/sorter.py --ref --key-filter=G --key-filter=Em --key-filter=DMix --key-filter=ADor; \
 	) | abcm2ps $(common_args) -1 -T8 | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
@@ -198,10 +198,10 @@ dist/tunebook-accordion.pdf : $(abc_source) $(common_depends) inc/accordion1.abc
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 echo '%%format d-to-c.fmt'; \
-	 bin/sorter.py --ref --key-filter=D; \
+	 bin/sorter.py --ref --key-filter=D --key-filter=Bm --key-filter=AMix --key-filter=EDor; \
 	 echo '%%newpage'; \
 	 echo '%%format g-to-c.fmt'; \
-	 bin/sorter.py --ref --key-filter=G; \
+	 bin/sorter.py --ref --key-filter=G --key-filter=Em --key-filter=DMix --key-filter=ADor; \
 	) | abcm2ps $(common_args) -1 -T6 -F accordion1.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
@@ -218,7 +218,7 @@ dist/cheatsheet.pdf : $(abc_source) $(common_depends) inc/cheatsheet.abc bin/mak
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) | bin/make_cheatsheet.py --rows 13 | abcm2ps $(common_args) -F  cheatsheet.fmt | ps2pdf - $@
+	) | bin/make_cheatsheet.py | abcm2ps $(common_args) -F  cheatsheet.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with whistle fingering
@@ -230,7 +230,7 @@ dist/cheatsheet-dwhistle.pdf : $(abc_source) $(common_depends) inc/cheatsheet-dw
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 7 | abcm2ps $(common_args) -T1 -F cheatsheet.fmt -F cheatsheet-dwhistle.fmt | ps2pdf - $@
+	) |  bin/make_cheatsheet.py | abcm2ps $(common_args) -T1 -F cheatsheet.fmt -F cheatsheet-dwhistle.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet D Whistle' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with mandolin fingering
@@ -242,7 +242,7 @@ dist/cheatsheet-mandolin.pdf : $(abc_source) $(common_depends) inc/cheatsheet-ma
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T7 -F cheatsheet.fmt -F cheatsheet-mandolin.fmt | ps2pdf - $@
+	) |  bin/make_cheatsheet.py | abcm2ps $(common_args) -T7 -F cheatsheet.fmt -F cheatsheet-mandolin.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet Mandolin' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with dulcimer fingering for an
@@ -255,7 +255,7 @@ dist/cheatsheet-dulcimer-d.pdf : $(abc_source) $(common_depends) inc/cheatsheet-
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-d.fmt | ps2pdf - $@
+	) |  bin/make_cheatsheet.py | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-d.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # The first few bars of all the tunes with dulcimer fingering for an
@@ -268,7 +268,7 @@ dist/cheatsheet-dulcimer-a.pdf : $(abc_source) $(common_depends) inc/cheatsheet-
 	 echo "%%header \"-$$(git describe --tags --always)		\""; echo; \
 	 echo '%%scale 0.6'; \
 	 bin/sorter.py --title; \
-	) |  bin/make_cheatsheet.py --rows 8 | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-a.fmt | ps2pdf - $@
+	) |  bin/make_cheatsheet.py | abcm2ps $(common_args) -T8 -F cheatsheet.fmt -F cheatsheet-dulcimer-a.fmt | ps2pdf - $@
 	exiftool -Title='Tunebook ABC - Cheatsheet DAD Dulcimer' -Author='Tunebook ABC' $@
 
 # Assorted files
