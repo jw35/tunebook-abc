@@ -313,5 +313,5 @@ target_filenames := $(patsubst dist/%,%,$(targets))
 website: $(targets) index.html .htaccess abc midi mp3 dist/tunebook-abc.zip dist/tunebook-midi.zip dist/tunebook-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 tunebook-abc.zip tunebook-midi.zip tunebook-mp3.zip jonw@sphinx.mythic-beasts.com:brsn.org.uk_html/tunebook-abc/; \
+		rsync -av ../index.html ../.htaccess $(target_filenames) abc midi mp3 tunebook-abc.zip tunebook-midi.zip tunebook-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
 	)
