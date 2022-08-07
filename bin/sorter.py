@@ -12,10 +12,10 @@ import re
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('--ref', action='store_true')
-group.add_argument('--title', action='store_true')
-parser.add_argument('--paginate', action='store_true')
-parser.add_argument('--key-filter')
+group.add_argument('--ref', action='store_true', help='sort by reference (X) header')
+group.add_argument('--title', action='store_true', help='sort by title (T) header')
+parser.add_argument('--paginate', action='store_true', help='paginate based on page number encoded in referece')
+parser.add_argument('--key-filter', action='append', help='filter out tunes not in indicated key(s)')
 args = parser.parse_args()
 
 X_match = re.compile(r'^X:\s*(.*?)$', flags=re.MULTILINE)
@@ -42,7 +42,7 @@ for song in sorted(songs, key=lambda song: song['key']):
 
     if args.key_filter:
         match = K_match.search(song['data'])
-        if match.group(1) != args.key_filter:
+        if match.group(1) not in args.key_filter:
             continue
 
     if args.ref and args.paginate:
