@@ -19,8 +19,6 @@ note_pattern = re.compile(r"(?P<note>([_=^]?[A-Ga-gxz](,+|'+)?))(?P<length>\d{0,
 bar_pattern = re.compile(r'(?P<bar>.*?\|)')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--rows', default=10, type=float,
-                    help='number of rows (default %(default)s)')
 parser.add_argument('--cols', default=2, type=float,
                     help='number of colums (default %(default)s)')
 parser.add_argument('--pagewidth', default=21, type=float,
@@ -88,9 +86,7 @@ length_so_far = 0
 metre = Fraction(4, 4)
 default_length = Fraction(1, 16)
 
-row = 0
-col = 0
-page = 0
+tune = -1
 in_tune = False
 
 for line in fileinput.input(args.files):
@@ -111,24 +107,30 @@ for line in fileinput.input(args.files):
     # Start of tune
     elif re.match('X:', line):
         in_tune = False
+        tune += 1
         # print(f'row {row}, col {col}, page {page}')
-        if row == 0:
-            if col == 0:
-                if page != 0:
-                    print('%%multicol end')
+        col = tune % args.cols
+        left_margin = args.margin+(col * (col_width+args.gutter))
+        right_margin = args.margin+((args.cols-col-1) * (col_width+args.gutter))
+        if col == 0:
+            if tune == 0:
                 print('%%newpage')
-                if page == 0:
-                    print(f'%%staffwidth {col_width}cm')
+            elif tune > 0:
+                print('%%multicol end')
                 print()
-                print('%%multicol start')
-            else:  # col > 1
-                print('%%multicol new')
-            lm = args.margin+(col * (col_width+args.gutter))
-            rm = args.margin+((args.cols-col-1) * (col_width+args.gutter))
-            # print(f'lm {lm}, rm {rm}')
-            print(f'%%leftmargin {lm}cm')
-            print(f'%%rightmargin {rm}cm')
-            print()
+            print('%%multicol start')
+            print(f'%%rightmargin {right_margin}cm')
+            print(f'%%staffwidth {col_width}cm')
+        elif col == args.cols-1:
+            print('%%multicol new')
+            print(f'%%leftmargin {left_margin}cm')
+            print(f'%%staffwidth {col_width}cm')
+        else:
+            print('%%multicol new')
+            print(f'%%leftmargin {left_margin}cm')
+            print(f'%%rightmargin {right_margin}cm')
+            print(f'%%staffwidth {col_width}cm')
+        print()
         print(line, end='')
     # Other headers if not in the notes section
     elif re.match('[A-Za-z]:', line) and not in_tune:
@@ -155,13 +157,6 @@ for line in fileinput.input(args.files):
             print(bar, end='')
             length_so_far += length
             if length_so_far >= 2 * metre:
-                row += 1
-                if row >= args.rows:
-                    row = 0
-                    col += 1
-                    if col >= args.cols:
-                        col = 0
-                        page += 1
                 break
 
         print()
