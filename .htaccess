@@ -13,3 +13,4 @@ RewriteRule "^tunebook-dulcimer-tabs-dgd\.pdf$"    "tunebook-dulcimer-tabs-dxd.p
 RewriteRule "^cheatsheet-dulcimer\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-dulcimer-dad\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-whistle\.pdf$"   "cheatsheet-dwhistle.pdf" [R=permanent,L]
+RewriteRule "^tunebook-baseclef\.pdf$"   "tunebook-bassclef.pdf" [R=permanent,L]

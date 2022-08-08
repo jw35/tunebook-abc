@@ -2,7 +2,7 @@ targets = dist/tunebook.abc \
 dist/tunebook.pdf \
 dist/tunebook-bflat.pdf \
 dist/tunebook-eflat.pdf \
-dist/tunebook-baseclef.pdf \
+dist/tunebook-bassclef.pdf \
 dist/tunebook-guitar-dwhistle.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook-dulcimer-chords-dad.pdf \
@@ -81,19 +81,19 @@ dist/tunebook-eflat.pdf : $(abc_source) $(common_depends) inc/eflat.abc fmt/efla
 	rm $@.ps
 	exiftool -Title='Tunebook ABC in Eb' -Author='Tunebook ABC' $@
 
-# All the tunes as a printable score matching the published Tunebook in the base clef
-dist/tunebook-baseclef.pdf : $(abc_source) $(common_depends) inc/baseclef.abc fmt/baseclef.fmt
+# All the tunes as a printable score matching the published Tunebook in the bass clef
+dist/tunebook-bassclef.pdf : $(abc_source) $(common_depends) inc/bassclef.abc fmt/bassclef.fmt
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-	 cat inc/baseclef.abc; echo; echo; \
+	 cat inc/bassclef.abc; echo; echo; \
 	 cat inc/frontmatter.abc; echo; echo; \
 	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
 	 echo '%%newpage'; \
 	 bin/sorter.py --ref --paginate; \
-	) | bin/strip_chords.py | abcm2ps $(common_args) -F baseclef.fmt | bin/abcmaddidx.tcl - $@.ps
+	) | bin/strip_chords.py | abcm2ps $(common_args) -F bassclef.fmt | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='Tunebook ABC in the base clef' -Author='Tunebook ABC' $@
+	exiftool -Title='Tunebook ABC in the bass clef' -Author='Tunebook ABC' $@
 
 ## Tablatures and chords
 
