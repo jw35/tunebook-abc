@@ -1,6 +1,6 @@
 %%vskip 1.5cm
 %%textfont * 36
-%%center Tunebook ABC - Base Clef Edition
+%%center Tunebook ABC - Bass Clef Edition
 %%vskip 27
 
 %%textfont * 18
@@ -8,5 +8,5 @@
 %%begintext justify
 %%This rendering of the tunebook contains all the tunes using much the
 %%same layout as the Tuneworks original but $1transposed into the
-%%base clef$0.
+%%bass clef$0.
 %%endtext
