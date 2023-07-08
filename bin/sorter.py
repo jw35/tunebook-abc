@@ -8,10 +8,12 @@ optionally paginated.
 
 import argparse
 import glob
+import os
 import re
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group(required=True)
+parser.add_argument('source', nargs='?', default='abc', help='source directory')
 group.add_argument('--ref', action='store_true', help='sort by reference (X) header')
 group.add_argument('--title', action='store_true', help='sort by title (T) header')
 parser.add_argument('--paginate', action='store_true', help='paginate based on page number encoded in referece')
@@ -25,7 +27,7 @@ K_match = re.compile(r'^K:\s*(.*?)$', flags=re.MULTILINE)
 songs = []
 current_page = None
 
-for filename in glob.glob('abc/[0-9]*.abc'):
+for filename in glob.glob(os.path.join(args.source, '[0-9]*.abc')):
     with open(filename) as file:
         data = file.read()
 
