@@ -44,10 +44,10 @@
     set fontname {}
 # example:
 #    set fontname {/Helvetica exch selectfont}
-    set fontsize 0
+    set fontsize 15
     set xmid 0
 # title of the index page
-    set index {index}
+    set index {Index}
 # the following values are used when fontname, fontsize or
 # xmid cannot be found in the input PostScript file
     set fontname_d {F0}		;# default encoded font name

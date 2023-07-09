@@ -1,36 +1,35 @@
-%%textfont * 18
+%%textfont * 16
+
+%%leftmargin 7cm
 
 %%vskip 5
-%%begintext justify
+%%begintext fill
 %%This tunebook is the result of a transcription into ABC notation (http://abcnotation.com/)
 %%of the second edition of the Tuneworks Tunebook, provided by 
 %%Tuneworks (https://www.tuneworks.co.uk/) in support of the workshops
-%%and sessions they run at a number of UK folk festivals. While lots of versions of most of these tunes
+%%and sessions they run at various UK folk festivals. While versions of most of these tunes
 %%are already available in ABC on sites like The Session, the ones here are
 %%intended to be note-for-note identical to the versions in the Tuneworks Tunebook.
 %%endtext
 
 %%vskip 5
-%%begintext justify
-%%A PDF copy of this music and the ABC notation from which it was produced
-%%and the same music in other formats can be downloaded from
-%%https://brsn.org.uk/tunebook-abc/
-%%endtext
-
-%%vskip 5
 %%begintext fill
+%%The ABC notation, and the results of processing it into various other formats
+%%(including this one) can be downloaded from https://brsn.org.uk/tunebook-abc/
 %%The tools used to produce all of this can be found on GitHub
 %%at https://github.com/jw35/tunebook-abc
 %%endtext
 
-%%vskip 5
-%%begintext justify
-%%This transcription and the subsequent processing is the work of Jon Warbrick <jon.warbrick@googlemail.com>.
+%%vskip 50
+%%textfont * 13
+%%begintext fill
+%%This transcription and the subsequent processing (but not the music itself) is the work of Jon Warbrick <jon.warbrick@googlemail.com>.
 %%The transcription and the results of subsequent processing is licensed under a Creative Commons
 %%'Attribution ShareAlike' licence.
 %%This means you can
 %%"remix, tweak, and build upon" this work even for commercial purposes,
-%%as long as you credit me and Tuneworks and license your new creations under the identical terms.
+%%as long as you credit Jon Warbrick and Tuneworks and license your new creations under the identical terms.
 %%See https://creativecommons.org/licenses/by-sa/4.0/
 %%endtext
 
+%%leftmargin 1.5cm

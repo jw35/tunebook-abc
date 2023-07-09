@@ -1,7 +1,7 @@
 pageheight 29.7cm
 pagewidth 21cm
 
-footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	"
+footer "	Tunebook ABC (2nd ed.) <https://brsn.org.uk/tunebook-abc/>	"
 
 topmargin 0.8cm
 leftmargin 1.5cm
@@ -9,19 +9,22 @@ rightmargin 1.5cm
 botmargin 1.2cm
 
 scale 0.74
-staffsep   36
 maxshrink  0.65
-lineskipfac 1.1
-parskipfac 0.4
+lineskipfac 1.5
+parskipfac 0.6
 textspace 0.2cm
-topspace 0.1cm
 titlespace 0.1cm
 infospace 0.2cm
 stretchlast 1
 
+staffsep   1.3cm
+topspace 0.8cm
+musicspace 0.6cm
 rbmax 5
 
 pdfmark 1
+
+bstemdown 1
 
 titleformat R-1 P-1 Q-1 T0 C1 O1 T0 N1
 
@@ -41,9 +44,12 @@ setfont-3      Times        12
 setfont-4      Times        12
 subtitlefont   Times        16
 tempofont      Times-Bold   15
-textfont       Times        16
+textfont       Helvetica    16
 titlefont      Helvetica    20
 vocalfont      Times-Bold   13
 voicefont      Times-Bold   13
 wordsfont      Times        16
+setfont-1      Helvetica-Bold 16
+setfont-2      Helvetica-Italic 16
+setfont-3      Helvetica-Italic-Bold 16
 

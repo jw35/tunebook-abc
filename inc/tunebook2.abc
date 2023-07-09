@@ -1,5 +1,6 @@
 %%vskip 1.5cm
-%%textfont * 36
-%%center Tunebook ABC
-%%center second edition
-%%vskip 27
+%%setfont-1 * 48
+%%text $1Tunebook ABC$0
+%%text $2second edition$0
+%%vskip 4cm
+
