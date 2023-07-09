@@ -1,0 +1,49 @@
+pageheight 29.7cm
+pagewidth 21cm
+
+footer "	Tunebook ABC <https://brsn.org.uk/tunebook-abc/>	"
+
+topmargin 0.8cm
+leftmargin 1.5cm
+rightmargin 1.5cm
+botmargin 1.2cm
+
+scale 0.74
+staffsep   36
+maxshrink  0.65
+lineskipfac 1.1
+parskipfac 0.4
+textspace 0.2cm
+topspace 0.1cm
+titlespace 0.1cm
+infospace 0.2cm
+stretchlast 1
+
+rbmax 5
+
+pdfmark 1
+
+titleformat R-1 P-1 Q-1 T0 C1 O1 T0 N1
+
+annotationfont Helvetica    12
+composerfont   Times-Italic 14
+footerfont     Helvetica    13
+gchordfont     Helvetica    12
+headerfont     Helvetica    13
+historyfont    Times        16
+infofont       Helvetica-Italic 14
+measurefont    Times-Italic 10
+partsfont      Times        15
+repeatfont     Times        13
+setfont-1      Times-Bold   18
+setfont-2      Times        12
+setfont-3      Times        12
+setfont-4      Times        12
+subtitlefont   Times        16
+tempofont      Times-Bold   15
+textfont       Times        16
+titlefont      Helvetica    20
+vocalfont      Times-Bold   13
+voicefont      Times-Bold   13
+wordsfont      Times        16
+
