@@ -18,7 +18,7 @@ dist/cheatsheet-dulcimer-d.pdf \
 dist/cheatsheet-dulcimer-a.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
-abc2_source := $(wildcard abc/[0-9]*.abc)
+abc2_source := $(wildcard abc2/[0-9]*.abc)
 
 common_depends = inc/frontmatter.abc bin/sorter.py fmt/tunebook.fmt
 common_args = - -i -D fmt -F tunebook.fmt -O -
