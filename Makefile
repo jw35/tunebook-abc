@@ -48,7 +48,7 @@ dist/tunebook2.abc: $(abc2_source) inc/tunebook2.abc inc/frontmatter2.abc bin/so
      cat inc/tunebook2.abc; echo; echo; \
 	 cat inc/frontmatter2.abc; echo; echo; \
 	 echo "% Version $$(git describe --tags --always)"; echo; \
-     bin/sorter.py --ref abc2; \
+     bin/sorter.py --ref --paginate abc2; \
 	) > $@
 
 # All the tunes as a printable score matching the published Tunebook
@@ -65,15 +65,9 @@ dist/tunebook.pdf : $(abc_source) inc/frontmatter.abc bin/sorter.py fmt/tunebook
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
 
-dist/tunebook2.pdf : $(abc2_source) inc/frontmatter2.abc bin/sorter.py fmt/tunebook.fmt inc/tunebook2.abc
+dist/tunebook2.pdf : dist/tunebook2.abc inc/frontmatter2.abc bin/sorter.py fmt/tunebook.fmt inc/tunebook2.abc
 	mkdir -p dist
-	(echo '%abc-2.1'; \
-	 cat inc/tunebook2.abc; echo; echo; \
-	 cat inc/frontmatter2.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%newpage'; \
-	 bin/sorter.py --ref --paginate abc2; \
-	) | abcm2ps $(common_args) | bin/abcmaddidx.tcl - $@.ps
+	cat dist/tunebook2.abc | abcm2ps $(common_args) | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
