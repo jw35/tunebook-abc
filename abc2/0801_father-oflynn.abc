@@ -7,7 +7,7 @@ Z:Jon Warbrick <jon.warbrick@googlemail.com>
 M:6/8
 L:1/8
 K:D
-|: "D" f3 g a3 f | "G" g2 B2 Bc d2 | "C" e2 ee"G" d2 g2 | BAGB"D" A4 |
-"D" f3 g a3 f | "G" g2 B2 Bc d2 | "C" e2 ee"G" d2 g2 | "D" a2 f2"G" g4 :|
-|: "D" A3 D D2 c2 |"G" B2 GA Bc d2 |"C" e2 ee"G" d2 g2 | BAGB"D" A4 |
-"D" A3 D D2 c2 | "G" B2 GA Bc d2 | "C" e2 ee"G" d2 g2 | "D" a2 f2"G" g4 :|
+|: A | "D" dAF DFA | "A" Bed cBA | "D" dcd ede | "A" faf ecA |
+"D" dAF DFA | "A" Bed cBA | "G" dcd"A" ede | "D" fdd d2 :|
+|: g | "D" fdf fga | "A" ecA ABc | "Bm" dcd Bed | "F#m" cAA A2 =c |
+"G" BGB Bcd | "D" AFD DFA | "G" dcd efg | "A" fdd"D" d2 :|

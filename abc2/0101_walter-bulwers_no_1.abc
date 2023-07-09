@@ -8,6 +8,6 @@ M:4/4
 L:1/8
 K:G
 |: Bc |"G" dcBd g3 f | "C" e2 A2 A2 AB | "D" cBAc f3 e | "G" d2 B2 B2 Bc |
-"G" dcBd g3 f | "C" e2 A2 A2 AG | "D" FGAB cdef |1 "G" g2 g2 g2 :|2 "G" g2 g2 g2 fg ||
-|: [K:D]"D" a2 fg a2 fg | "D" agfg"A" e4 | "A" e2 a2 gf e2 | "D" dcde fefg |
+"G" dcBd g3 f | "C" e2 A2 A2 AG | "D" FGAB cdef |1 "G" g2 g2 g2 :|2 "G" g2 g2 g2 fg |
+[K:D] |: "D" a2 fg a2 fg | "D" agfg"A" e4 | "A" e2 a2 gf e2 | "D" dcde fefg |
 "D" a2 fg a2 fg | "D" agfg"A" e4 | "A" e2 a2 gf e2 |1 "D" d2 f2 d2 fg :|2" D" d2 f2 d2 |]
