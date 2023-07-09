@@ -7,7 +7,6 @@ Z:Jon Warbrick <jon.warbrick@googlemail.com>
 M:2/2
 L:1/8
 K:G
-|: "G"G>A BB "C"cBAc | "G"BAGF "D"E2 D2 | "G"G>A BB "C"cBAc | "G"B/A/G "D"AF "G"G2 G2 :| 
-|: "G"dc/B/ AB "C"cB/A/ GB | "G"AGFG "D"A>B A2 | "G"dc/B/ AB "C"dc/B/ GB | "G"AG"D"GF "G"G2 G2 :|
-K:F
-|: "Gm"BA/G/ BA/G/ "D"^FG A2 | "D"DE^FG AB"Gm"AG | "Gm"BA/G/ BA/G/ "D"^FG A2 | [1"D"DE^FG GF "Gm"G2 :| [2"D"DE^FG GF "G"G2 |]
+|: "G" G>A BB"C" cBAc | "G" BAGF"D" E2 D2 | "G" G>A BB"C" cBAc | "G" B/A/G"D" AF"G" G2 G2 :|
+|: "G" dc/B/ AB"C" cB/A/ GB | "G" AGFG"D" A>B A2 | "G" dc/B/ AB"C" cB/A/ GB | "G" AG"D"GF"G" G2 G2 :|
+|: [K:F] "Gm" BA/G/ BA/G/"D" ^FG A2 | "D" DE^FG AB"Gm"AG | "Gm" BA/G/ BA/G/"D" ^FG A2 |1 "D" DE^FG GF"Gm" G2 :|2 "D" DE^FG GF"G" G2 |]
