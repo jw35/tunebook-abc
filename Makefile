@@ -546,7 +546,7 @@ $(midi2_targets) : dist/midi2/%.midi : abc2/%.abc
 	abc2midi "$<" -o "$@"
 
 dist/tunebook2-midi.zip: $(midi2_targets)
-	( cd dist/midi2; zip ../tunebook-midi2.zip *.midi )
+	( cd dist/midi2; zip ../tunebook2-midi.zip *.midi )
 
 mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
 mp3: $(mp3_targets)
@@ -576,8 +576,8 @@ dist/tunebook2-mp3.zip: $(mp3_2_targets)
 # Copy the generated files to a web site
 target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: $(targets) index.html .htaccess abc abc2 midi midi2 mp3 mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
+website: $(targets) index.html .htaccess dist/abc dist/abc2 dist/midi dist/midi2 dist/mp3 dist/mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
+		rsync -av ../index.html ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
 	)
