@@ -1,0 +1,17 @@
+%%vskip 1.5cm
+%%text $4Tunebook ABC - Mountain Dulcimer CheatSheet 'D'$0
+%%text $2second edition$0
+%%vskip 4cm
+
+%%leftmargin 7cm
+
+%%textfont * 16
+%%vskip 5
+%%begintext justify
+%%This is a rendering of the Tuneworks tunebook as a 'CheatSheet' that shows
+%%the first couple of bars of the tunes with Dulcimer tabs
+%%for an instrument with melody string(s) tuned to 'D'
+%%to make it easier to find or remember how to play a particular tune.
+%%endtext
+
+%%leftmargin 1.5cm

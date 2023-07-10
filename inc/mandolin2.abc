@@ -1,0 +1,15 @@
+%%vskip 1.5cm
+%%text $4Tunebook ABC - Mandolin$0
+%%text $2second edition$0
+%%vskip 4cm
+
+%%leftmargin 7cm
+
+%%textfont * 16
+%%vskip 5
+%%begintext fill
+%%This is a rendering of the Tuneworks tunebook that includes tabs for conventionally-tuned
+%%Mandolins.
+%%endtext
+
+%%leftmargin 1.5cm

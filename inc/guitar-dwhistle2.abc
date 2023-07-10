@@ -1,0 +1,17 @@
+%%vskip 1.5cm
+%%text $4Tunebook ABC$0
+%%vskip 0.6cm
+%%text $4Guitar and D Whistle$0
+%%text $2second edition$0
+%%vskip 4cm
+
+%%leftmargin 7cm
+
+%%textfont * 16
+%%vskip 5
+%%begintext fill
+%%This is a rendering of the Tuneworks tunebook that includes Guitar chord diagrams and
+%%whistle fingerings for D whistles.
+%%endtext
+
+%%leftmargin 1.5cm

@@ -1,0 +1,16 @@
+%%vskip 1.5cm
+%%text $4Tunebook ABC - CheatSheet$0
+%%text $2second edition$0
+%%vskip 4cm
+
+%%leftmargin 7cm
+
+%%textfont * 16
+%%vskip 5
+%%begintext justify
+%%This is a rendering of the Tuneworks tunebook as a 'CheatSheet' that just shows
+%%the first couple of bars of each tune to make it easier to find a particular
+%%tune.
+%%endtext
+
+%%leftmargin 1.5cm
