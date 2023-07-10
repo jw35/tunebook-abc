@@ -14,9 +14,10 @@ import sys
 
 assert len(sys.argv) > 1, "Usage get_tags.py <mp3 filename>"
 mp3_pathname = sys.argv[1]
+abc_dir = sys.argv[2]
 file_root = os.path.splitext(os.path.basename(mp3_pathname))[0]
 assert file_root, "Can't find file root"
-abc_pathname = os.path.join('abc', file_root + '.abc')
+abc_pathname = os.path.join(abc_dir, file_root + '.abc')
 assert os.path.isfile(abc_pathname), abc_pathname + ' not found'
 
 with open(abc_pathname) as file:
@@ -31,7 +32,7 @@ with open(abc_pathname) as file:
             title = match.group(2) + ' ' + match.group(1)
         title = re.sub(r'"', r'\\"', title)
 
-all_filenames = sorted(glob.glob('abc/[0-9]*.abc'))
+all_filenames = sorted(glob.glob(abc_dir + '/[0-9]*.abc'))
 
 track_no = all_filenames.index(abc_pathname) + 1
 n_tracks = len(all_filenames)
