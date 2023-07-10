@@ -163,7 +163,7 @@ beginps
   /fr6{-11 15 M /Helvetica-Italics 7 selectfont (fr6) show}!
 
   % barre from string to string - e.g. barre14 for complete barre
-  /barre14{s4 21 gdot s1 21 gdot slw09 s3 21 M  s1 0 RL stroke}!
+  /barre14{s4 21 gdot s1 21 gdot slw09 s4 21 M  s1 0 RL stroke}!
   /barre13{s3 21 gdot s1 21 gdot slw09 s3 21 M  s2 0 RL stroke}!
   /barre12{s2 21 gdot s1 21 gdot slw09 s2 21 M  s3 0 RL stroke}!
 
@@ -268,6 +268,17 @@ beginps
     s4f3
     barre13
     grestore}!
+  /F{
+    fboard nut
+    s2 f1 s4 f2
+    s2f1 s4f2
+    grestore}!
+  /D7{
+    fboard fr2
+    s1 f2
+    s1f2
+    barre14
+    grestore}!
 endps
 
 % == Decoration definitions ==
@@ -286,5 +297,7 @@ deco Am    3 Am    38 0 0
 deco A7    3 A7    38 0 0
 deco B     3 B     38 0 0
 deco Bm    3 Bm    38 0 0
+deco F     3 F     38 0 0
+deco D7    3 D7    38 0 0
 
 % --- End of file guitarchords.fmt
