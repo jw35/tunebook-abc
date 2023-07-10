@@ -1,5 +1,7 @@
 %%vskip 1.5cm
-%%text $4Tunebook ABC - DAD/DGD Dulcimer TABs$0
+%%text $4Tunebook ABC$0
+%%vskip 0.6cm
+%%text $4DAD/DGD Dulcimer TABs$0
 %%text $2second edition$0
 %%vskip 4cm
 
@@ -7,10 +9,10 @@
 
 %%textfont * 16
 %%begintext fill
-%%TThis is a rendering of the Tuneworks tunebook including simple melody tabs for Mountain Dulcimers.
+%%This is a rendering of the Tuneworks tunebook including simple melody tabs for Mountain Dulcimers.
 %%All the tunes in D and related keys appear in the $1first half$0 and assume D-A-D tuning; tunes in G
-%%and related keys appear in the $1second half$0 and assume D-G-D tuning. The two tunes in
-%%the key of A are not included.
+%%and related keys appear in the $1second half$0 and assume D-G-D tuning. Tunes in other keys
+%%are not included.
 %%endtext
 
 %%leftmargin 1.5cm
