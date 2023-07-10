@@ -52,4 +52,4 @@ wordsfont      Times        16
 setfont-1      Helvetica-Bold 16
 setfont-2      Helvetica-Italic 16
 setfont-3      Helvetica-Italic-Bold 16
-
+setfont-4      Helvetica-Bold 48
