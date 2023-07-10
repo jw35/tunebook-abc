@@ -13,11 +13,8 @@ dist/tunebook2-guitar-dwhistle.pdf \
 dist/tunebook-mandolin.pdf \
 dist/tunebook2-mandolin.pdf \
 dist/tunebook-dulcimer-chords-dad.pdf \
-dist/tunebook2-dulcimer-chords-dad.pdf \
 dist/tunebook-dulcimer-tabs-dxd.pdf \
-dist/tunebook2-dulcimer-tabs-dxd.pdf \
 dist/tunebook-dulcimer-tabs-a.pdf \
-dist/tunebook2-dulcimer-tabs-a.pdf \
 dist/tunebook-ukulele.pdf \
 dist/tunebook2-ukulele.pdf \
 dist/cheatsheet.pdf \
@@ -27,9 +24,7 @@ dist/cheatsheet2-dwhistle.pdf \
 dist/cheatsheet-mandolin.pdf \
 dist/cheatsheet2-mandolin.pdf \
 dist/cheatsheet-dulcimer-d.pdf \
-dist/cheatsheet2-dulcimer-d.pdf \
-dist/cheatsheet-dulcimer-a.pdf \
-dist/cheatsheet2-dulcimer-a.pdf
+dist/cheatsheet-dulcimer-a.pdf
 
 abc_source := $(wildcard abc/[0-9]*.abc)
 abc2_source := $(wildcard abc2/[0-9]*.abc)
