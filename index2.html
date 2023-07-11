@@ -98,19 +98,42 @@
 
         <p>
             The transcription is bound to contain mistakes, defined as (almost) anything that isn't the same as it is in the
-            Tuneworks Tunebook (ignoring minor stylistic differences).
+            Tuneworks Tunebook (ignoring minor stylistic differences and the differences listed below).
             Likewise, the various derived formats are unlikely to be error free even if the ABC
             transcriptions are correct.
             Please report any mistakes that you find, either by creating a GitHub
             issue or (better) a pull request, or (if that doesn't mean anything to you) by emailing
             Jon Warbrick <a href="mailto:jon.warbrick@googlemail.com">jon.warbrick@googlemail.com</a>.</p>
 
+        <p>
+            The following differences from Tuneworks Tunebook are expected:
+        </p>
+        <ul>
+            <li>The annotation for the second time bar at the end of the A part of 'My Darling Asleep'
+                has been removed to stop <i>abc2midi</i> seeing bars 8 and 9 as having the wrong number of
+                time units.
+            </li>
+            <li>The annotation for the first and second time bar at the end of the A part of 'Oranges in Bloom'
+                has been removed because the two endings are identical and to stop <i>abc2midi</i> seeing bars 9 and
+                10 as having the wrong number of time units.
+            </li>
+            <li>The D and E notes at the end of the first time bar at the end of the A part of 'Freshwater Fran' have been
+                removed as they (incorrectly) repeat the the first two notes of the tune.
+            </li>
+            <li>The opening repeat marker in the B part of 'Dearest Dicky' has been moved to the start of the first full bar so
+                that the leading B isn't played the second time through and to stop <i>abc2midi</i> seeing bar 8 as having
+                the wrong number of time units.
+            </li>
+        </ul>
+
         <h2>Notes</h2>
 
         <p>
             This work was inspired by <a href="http://www.pghardy.net/concertina/tunebooks/">Paul
             Hardy's Tunebooks</a> and his
-            <a href="http://www.pghardy.net/concertina/tunebooks/tunebook_process.html">tunebook process page</a> informed the initial processing pipeline. John Hinton of <a href="https://www.facebook.com/johnhintonmusician">John Hinton Music</a> provided much-needed music theory advice. Vince Hodgson of Tuneworks kindly provided the Tunebook tunes in ABC format to start with.
+            <a href="http://www.pghardy.net/concertina/tunebooks/tunebook_process.html">tunebook process page</a>
+            informed the initial processing pipeline. John Hinton of <a href="https://www.facebook.com/johnhintonmusician">John
+            Hinton Music</a> and Graham Louth provided much-needed music theory advice. Vince Hodgson of Tuneworks kindly provided an ABC export from the master copy of the second edition Tunebook.
          </p>
 
         <p>
