@@ -53,14 +53,11 @@ dist/tunebook.abc: $(abc_source) inc/tunebook.abc inc/frontmatter.abc bin/sorter
      bin/sorter.py --ref; \
 	) > $@
 
-dist/tunebook2.abc: $(abc2_source) inc/tunebook2.abc inc/frontmatter2.abc bin/sorter.py
+dist/tunebook2.abc: $(abc2_source) bin/sorter.py
 	mkdir -p dist
 	(echo '%abc-2.1'; \
-     cat inc/tunebook2.abc; echo; echo; \
-	 cat inc/frontmatter2.abc; echo; echo; \
-	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
-	 echo '%%newpage'; \
-     bin/sorter.py --ref --paginate abc2; \
+	 echo "% Version $$(git describe --tags --always)"; echo; \
+     bin/sorter.py --ref abc2; \
 	) > $@
 
 # All the tunes as a printable score matching the published Tunebook
@@ -77,12 +74,18 @@ dist/tunebook.pdf : $(abc_source) inc/frontmatter.abc bin/sorter.py fmt/tunebook
 	rm $@.ps
 	exiftool -Title='Tunebook ABC' -Author='Tunebook ABC' $@
 
-dist/tunebook2.pdf : dist/tunebook2.abc inc/frontmatter2.abc bin/sorter.py fmt/tunebook2.fmt inc/tunebook2.abc
+dist/tunebook2.pdf : $(abc2_source) inc/frontmatter2.abc bin/sorter.py fmt/tunebook2.fmt inc/tunebook2.abc
 	mkdir -p dist
-	cat dist/tunebook2.abc | abcm2ps $(common_args2) | bin/abcmaddidx.tcl - $@.ps
+	(echo '%abc-2.1'; \
+	 cat inc/tunebook2.abc; echo; echo; \
+	 cat inc/frontmatter2.abc; echo; echo; \
+	 echo "%%header \"-$$(git describe --tags --always)		\$$P\""; echo; \
+	 echo '%%newpage'; \
+	 bin/sorter.py --ref --paginate abc2; \
+	) | abcm2ps $(common_args2) | bin/abcmaddidx.tcl - $@.ps
 	ps2pdf $@.ps $@
 	rm $@.ps
-	exiftool -Title='2nd ed Tunebook ABC' -Author='Tunebook ABC' $@
+	exiftool -Title='2nd ed. Tunebook ABC' -Author='Tunebook ABC' $@
 
 # All the tunes as a printable score matching the published Tunebook in Bb
 dist/tunebook-bflat.pdf : $(abc_source) $(common_depends) inc/bflat.abc fmt/bflat.fmt
@@ -571,8 +574,8 @@ dist/tunebook2-mp3.zip: $(mp3_2_targets)
 # Copy the generated files to a web site
 target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: $(targets) index.html .htaccess dist/abc dist/abc2 dist/midi dist/midi2 dist/mp3 dist/mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
+website: $(targets) index.html index2.html .htaccess dist/abc dist/abc2 dist/midi dist/midi2 dist/mp3 dist/mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
+		rsync -av ../index.html ../index2.html ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
 	)
