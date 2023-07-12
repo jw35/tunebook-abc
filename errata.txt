@@ -1,0 +1,33 @@
+Tunebook 2nd edition
+====================
+
+Probably errors
+---------------
+
+* In Flatwater Fran (p24) the DE notes at the end of the First time bar at the
+  end of the A part should be deleted as they (incorrectly) include the the
+  first two notes of the tune in the repeat.
+
+* In Dearest Dicky (p31) the B at the start of the 'B' part is incorrectly
+  repeated the second time through. This can be fixed either by moving
+  the 'B' part start repeat to just before the first full bar, or with
+  separate first time and second time bars at the end of the A part, with the
+  First time bar being as is, but the Second time bar adding the b note which
+  is currently shown as the first note of the B part (which should be
+  deleted).
+
+Thoughts
+--------
+
+* Are the final bars of Saddle the Pony (p5) correct?  Should the bar before
+  the final repeat sign be a First time and the final bar Second time, or
+  whether it is intended that both be played second time through (i.e. as
+  an 'out' bar)?
+
+* Manx Jig (p30) and Morrison's (p8) might be easier to read if the B part was
+  written out in full without the repeat (albeit it would then be six rows
+  rather than five).
+
+* In Orange in Bloom (p18) is the Second time bar at the end of the A part
+  needed, since it is almost identical to the First time bar (though there is
+  a "G" chord on one and not the other)?
