@@ -522,6 +522,7 @@ $(abc2_targets) : dist/abc2/%.abc : abc2/%.abc
 	mkdir -p dist/abc2
 	( 	\
 		echo '%abc-2.1'; \
+		echo "%Version $$(git describe --tags --always)"; \
 		cat "$<"; \
 	) > $@
 
