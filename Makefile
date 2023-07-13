@@ -575,7 +575,7 @@ dist/tunebook2-mp3.zip: $(mp3_2_targets)
 # Copy the generated files to a web site
 target_filenames := $(patsubst dist/%,%,$(targets))
 .PHONY: website
-website: $(targets) index.html index2.html errata.txt .htaccess dist/abc dist/abc2 dist/midi dist/midi2 dist/mp3 dist/mp3-2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
+website: $(targets) index.html index2.html errata.txt .htaccess abc abc2 midi midi2 mp3 mp3_2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
 	( \
 		cd dist; \
 		rsync -av ../index.html ../index2.html ../errata.txt ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
