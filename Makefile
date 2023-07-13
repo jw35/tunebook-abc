@@ -504,8 +504,13 @@ dist/cheatsheet2-dulcimer-a.pdf : $(abc2_source) $(common_depends2) inc/cheatshe
 
 # Assorted files
 
+.PHONY: abc abc2 midi midi2 mp3 mp3_2
+
+# ABC files ---------------------------------------------------------
+
 abc_targets := $(patsubst abc/%,dist/abc/%,$(abc_source))
-abc: $(abc_targets)
+abc: $(abc_targets) dist/abc/.htaccess
+
 $(abc_targets) : dist/abc/%.abc : abc/%.abc
 	mkdir -p dist/abc
 	( 	\
@@ -513,11 +518,15 @@ $(abc_targets) : dist/abc/%.abc : abc/%.abc
 		cat "$<"; \
 	) > $@
 
+dist/abc/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/abc/.htaccess
+
 dist/tunebook-abc.zip: $(abc_targets)
 	( cd dist/abc; zip ../tunebook-abc.zip *.abc )
 
 abc2_targets := $(patsubst abc2/%,dist/abc2/%,$(abc2_source))
-abc2: $(abc2_targets)
+abc2: $(abc2_targets) dist/abc2/HEADER.html dist/abc2/README.html dist/abc2/.htaccess
+
 $(abc2_targets) : dist/abc2/%.abc : abc2/%.abc
 	mkdir -p dist/abc2
 	( 	\
@@ -526,29 +535,57 @@ $(abc2_targets) : dist/abc2/%.abc : abc2/%.abc
 		cat "$<"; \
 	) > $@
 
+dist/abc2/HEADER.html: abc2-HEADER.html
+	cp abc2-HEADER.html dist/abc2/HEADER.html
+
+dist/abc2/README.html: README.html
+	cp README.html dist/abc2/README.html
+
+dist/abc2/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/abc2/.htaccess
+
 dist/tunebook2-abc.zip: $(abc2_targets)
 	( cd dist/abc2; zip ../tunebook2-abc.zip *.abc )
 
+# MIDI files --------------------------------------------------------
+
 midi_targets := $(patsubst %.abc,%.midi,$(patsubst abc/%,dist/midi/%,$(abc_source)))
-midi: $(midi_targets)
+midi: $(midi_targets) dist/midi/.htaccess
+
 $(midi_targets) : dist/midi/%.midi : abc/%.abc
 	mkdir -p dist/midi
 	abc2midi "$<" -o "$@"
+
+dist/midi/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/midi/.htaccess
 
 dist/tunebook-midi.zip: $(midi_targets)
 	( cd dist/midi; zip ../tunebook-midi.zip *.midi )
 
 midi2_targets := $(patsubst %.abc,%.midi,$(patsubst abc2/%,dist/midi2/%,$(abc2_source)))
-midi2: $(midi2_targets)
+midi2: $(midi2_targets) dist/midi2/HEADER.html dist/midi2/README.html dist/midi2/.htaccess
+
 $(midi2_targets) : dist/midi2/%.midi : abc2/%.abc
 	mkdir -p dist/midi2
 	abc2midi "$<" -o "$@"
 
+dist/midi2/HEADER.html: midi2-HEADER.html
+	cp midi2-HEADER.html dist/midi2/HEADER.html
+
+dist/midi2/README.html: README.html
+	cp README.html dist/midi2/README.html
+
+dist/midi2/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/midi2/.htaccess
+
 dist/tunebook2-midi.zip: $(midi2_targets)
 	( cd dist/midi2; zip ../tunebook2-midi.zip *.midi )
 
+# MP3 files ---------------------------------------------------------
+
 mp3_targets := $(patsubst %.abc,%.mp3,$(patsubst abc/%,dist/mp3/%,$(abc_source)))
-mp3: $(mp3_targets)
+mp3: $(mp3_targets) dist/mp3/.htaccess
+
 tmp_file := $(shell mktemp)
 $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	mkdir -p dist/mp3
@@ -556,17 +593,30 @@ $(mp3_targets) : dist/mp3/%.mp3 : dist/midi/%.midi
 	lame $(shell bin/get_tags.py $@ "abc") --tl "Tunebook ABC" --ta "Tunebook ABC" --tg Folk "$(tmp_file)" "$@"
 	rm "$(tmp_file)"
 
+dist/mp3/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/mp3/.htaccess
+
 dist/tunebook-mp3.zip: $(mp3_targets)
 	( cd dist/mp3; zip ../tunebook-mp3.zip *.mp3 )
 
 mp3_2_targets := $(patsubst %.abc,%.mp3,$(patsubst abc2/%,dist/mp3-2/%,$(abc2_source)))
-mp3_2: $(mp3_2_targets)
+mp3_2: $(mp3_2_targets) dist/mp3-2/HEADER.html dist/mp3-2/README.html dist/mp3-2/.htaccess
+
 tmp_file := $(shell mktemp)
 $(mp3_2_targets) : dist/mp3-2/%.mp3 : dist/midi2/%.midi
 	mkdir -p dist/mp3-2
 	fluidsynth -F "$(tmp_file)" -T wav GeneralUser_GS_v1.471.sf2 "$<"
 	lame $(shell bin/get_tags.py $@ "abc2") --tl "2nd ed Tunebook ABC" --ta "2nd ed Tunebook ABC" --tg Folk "$(tmp_file)" "$@"
 	rm "$(tmp_file)"
+
+dist/mp3-2/HEADER.html: mp3-2-HEADER.html
+	cp mp3-2-HEADER.html dist/mp3-2/HEADER.html
+
+dist/mp3-2/README.html: README.html
+	cp README.html dist/mp3-2/README.html
+
+dist/mp3-2/.htaccess: .htaccess-listings
+	cp .htaccess-listings dist/mp3-2/.htaccess
 
 dist/tunebook2-mp3.zip: $(mp3_2_targets)
 	( cd dist/mp3-2; zip ../tunebook2-mp3.zip *.mp3 )
@@ -578,5 +628,5 @@ target_filenames := $(patsubst dist/%,%,$(targets))
 website: $(targets) index.html index2.html errata.txt .htaccess abc abc2 midi midi2 mp3 mp3_2 dist/tunebook-abc.zip dist/tunebook2-abc.zip dist/tunebook-midi.zip dist/tunebook2-midi.zip dist/tunebook-mp3.zip dist/tunebook2-mp3.zip
 	( \
 		cd dist; \
-		rsync -av ../index.html ../index2.html ../errata.txt ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
+		rsync -av --delete-delay  ../index.html ../index2.html ../errata.txt ../.htaccess $(target_filenames) abc abc2 midi midi2 mp3 mp3-2 tunebook-abc.zip tunebook2-abc.zip tunebook-midi.zip tunebook2-midi.zip tunebook-mp3.zip tunebook2-mp3.zip jonw@caracal.mythic-beasts.com:www/brsn.org.uk/tunebook-abc/; \
 	)

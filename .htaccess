@@ -1,7 +1,3 @@
-Options +Indexes
-IndexOptions -FancyIndexing SuppressIcon SuppressHTMLPreamble
-IndexIgnore .. HEADER.html
-
 RewriteEngine On
 Options FollowSymLinks
 RewriteBase "/tunebook-abc/"
