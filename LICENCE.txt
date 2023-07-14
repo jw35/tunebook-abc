@@ -1,5 +1,5 @@
 
-The contents of this repository is free software: you can redistribute
+The original contents of this repository is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License as
 published by the Free Software Foundation, either version 2 of the
 License, or (at your option) any later version.
@@ -18,18 +18,21 @@ commercial purposes, as long as you credit the original authors and
 license your new creations under the identical terms.
 
 This repository is the work of Jon Warbrick
-jon.warbrick@googlemail.com.
+jon.warbrick@googlemail.com and (c) Jon Warbrick 2019-2023.
 
 Included work
 =============
 
 This repository contains copies of, or work derived from the work of
-other people, including:
+other people which are not covered by this licence, including:
 
-The Tuneworks Tunebook. Its licensing is unclear, other than it saying:
+The tune 'Travellers' Joy is (c) Squeezer Music and is included in this
+collection by kind permission of Janet May. The tune 'Flatwater Fran' is
+(c) Phil Cunningham and is included by kind permission of Phil Cunningham.
 
-      "The book is downloadable from http://www.tuneworks.co.uk/.
-       Please feel free to use it as widely as you like".
+The Tuneworks Tunebook. Except where indicated the licencing of the tunes
+in the Tuneworks Tunebook is unclear, though many of the tunes are
+traditional.
 
 abcmaddidx.tcl by Jean-François Moine from http://moinejf.free.fr/
 
