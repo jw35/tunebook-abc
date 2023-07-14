@@ -10,3 +10,4 @@ RewriteRule "^cheatsheet-dulcimer\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permane
 RewriteRule "^cheatsheet-dulcimer-dad\.pdf$"  "cheatsheet-dulcimer-d.pdf" [R=permanent,L]
 RewriteRule "^cheatsheet-whistle\.pdf$"   "cheatsheet-dwhistle.pdf" [R=permanent,L]
 RewriteRule "^tunebook-baseclef\.pdf$"   "tunebook-bassclef.pdf" [R=permanent,L]
+RewriteRule "^index2\.html$"        "" [R=permanent,L]
