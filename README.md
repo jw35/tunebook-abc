@@ -2,8 +2,7 @@ Tunebook ABC
 ============
 
 This is a transcription of all the tunes in the
-[Tuneworks](https://www.tuneworks.co.uk/)
-[Tunebook](https://docs.wixstatic.com/ugd/d6448b_974724120ad6465fbf8f417ff89daf0b.pdf)
+[Tuneworks Tunebooks](https://www.tuneworks.co.uk/)
 into [ABC notation](http://abcnotation.com/) and a set of tools to process that into various
 useful formats.
 
@@ -12,7 +11,8 @@ See https://www.brsn.org.uk/tunebook-abc/ for the processed result.
 Processing
 ----------
 
-All the tunes are represented by ABC file fragments in at `abc/` directory. Their file names,
+All the tunes are represented by ABC file fragments in the  `abc/` (first edition) and `abc2/` (second edition)
+directories. Their file names,
 and the `X:` field reference numbers inside them, are based on the two-digit page
 number on which the tune appears in the Tunebook and a two-digit sequence number
 within that page.
@@ -41,7 +41,7 @@ informed the processing pipeline.
 Licensing
 ---------
 
-The contents of this repository is licenced under the terms of the GNU General Public License.
+The transcription into ABC, the results of processing them, and the original processing tools (but not the music itself) is licenced under the terms of the GNU General Public License.
 In addition, the transcribed ABC files and the results of processing them
 into various other formats distributed from https://brsn.org.uk/tunebook-abc/
 are also licensed under the Creative Commons
